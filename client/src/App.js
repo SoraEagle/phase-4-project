@@ -1,8 +1,12 @@
+import React, {useEffect, useState} from 'react';
+import {Routes, Route} from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
+function App(){
+  const [user, setUser] = useState(null);
+  return(
+    // <NavBar />
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
