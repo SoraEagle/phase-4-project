@@ -1,9 +1,26 @@
+import React, {useEffect, useState} from "react"
+import { Switch, Route } from "react-dom";
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
+function App(){
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // auto-login
+    fetch("/api/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+  
+  return(
+    <div className="App"
+    style={{
+      height: "100vh",
+      textAlign: "center"
+    }}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
