@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react"
 import { Switch, Route } from "react-dom";
 import logo from './logo.svg';
 import './App.css';
+import Footer from "./components/Footer";
 
 function App(){
   const [user, setUser] = useState(null);
@@ -35,6 +36,7 @@ function App(){
           Learn React
         </a>
       </header>
+      <Footer />
     </div>
   );
 }
