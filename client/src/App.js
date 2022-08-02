@@ -21,30 +21,13 @@ function App(){
   }, []);
   
   return(
-    <div className="App"
-    style={{
-      height: "100vh",
-      textAlign: "center"
-    }}>
       <Router>
         <NavBar />
         <Routes>
-          <Route path={"/"} element={<Home />}></Route>
+          <Route path={"/"} element={<Home />} />
         </Routes>
+        <Footer />
       </Router>
-      <div id="content">
-          <img src={logo} className="App-logo" alt="logo" />
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-      </div>
-      <Footer />
-    </div>
   );
 }
 

@@ -1,5 +1,7 @@
 function Home(){
-    <header className="App-header"></header>
+    return(
+        <header></header>
+    )
 }
 
 export default Home;

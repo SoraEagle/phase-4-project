@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-dom';
+import {NavLink} from 'react-router-dom';
 
 const linkStyles = {
     border: "2px solid black"
@@ -16,14 +16,14 @@ function NavBar(user, setUser){
     return(
         <div id="nav">
             <NavLink style={linkStyles} to="/">
-                {/* Home */} 
+                Home
             </NavLink>
-            <NavLink style={linkStyles} to="/">
+            {/* <NavLink style={linkStyles} to="/"> */}
                 {/* Hotels */}
-            </NavLink>
-            <NavLink style={linkStyles} to="/">
+            {/* </NavLink> */}
+            {/* <NavLink style={linkStyles} to="/"> */}
                 {/* My Bookings */}
-            </NavLink>
+            {/* </NavLink> */}
             <button onClick={handleLogoutClick}>
                 Log Out
             </button>
