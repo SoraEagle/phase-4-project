@@ -16,10 +16,13 @@ function NavBar(user, setUser){
     return(
         <div id="nav">
             <NavLink style={linkStyles} to="/">
-                {/*  */}
+                {/* Home */} 
             </NavLink>
             <NavLink style={linkStyles} to="/">
-                {/*  */}
+                {/* Hotels */}
+            </NavLink>
+            <NavLink style={linkStyles} to="/">
+                {/* My Bookings */}
             </NavLink>
             <button onClick={handleLogoutClick}>
                 Log Out

@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react"
-import { Switch, Route } from "react-dom";
+// import {Route} from "react-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
+import Hotels from "./pages/Hotels";
 
 function App(){
   const [user, setUser] = useState(null);
@@ -22,8 +25,15 @@ function App(){
       height: "100vh",
       textAlign: "center"
     }}>
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path={"/"} element={<Hotels />}></Route>
+        </Routes>
+      </Router>
       <div id="content">
         <header className="App-header">
+          <Route exact path="/"element={<Hotels />}></Route>
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
