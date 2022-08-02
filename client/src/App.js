@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
 import Hotels from "./pages/Hotels";
 
 function App(){
@@ -28,16 +29,11 @@ function App(){
       <Router>
         <NavBar />
         <Routes>
-          <Route path={"/"} element={<Hotels />}></Route>
+          <Route path={"/"} element={<Home />}></Route>
         </Routes>
       </Router>
       <div id="content">
-        <header className="App-header">
-          <Route exact path="/"element={<Hotels />}></Route>
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -46,7 +42,6 @@ function App(){
           >
             Learn React
           </a>
-        </header>
       </div>
       <Footer />
     </div>
