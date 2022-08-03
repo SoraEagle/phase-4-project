@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 const linkStyles = {
     display: "inline-block",
     width: "50px",
-    margin: "0px 30px 6px",
+    margin: "0px 30px 60px",
     textDecoration: "underline",
     border: "2px solid black"
 };
