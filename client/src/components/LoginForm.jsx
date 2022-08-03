@@ -38,6 +38,16 @@ function LoginForm({onLogin}){
                 />
             </FormField>
             <FormField>
+                <Label htmlFor="password">Password</Label>
+                <Input
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                />
+            </FormField>
+            <FormField>
                 <Button variant="fill" color="primary" type="submit">
                     {isLoading ? "Loading..." : "Login"}
                     </Button>
