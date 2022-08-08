@@ -35,7 +35,7 @@ function SignUpForm(onLogin){
     <form onSubmit={handleSubmit}>
       <FormField>
         <Label htmlFor="username">Username</Label>
-        <Input
+        <input
           type="text"
           id="username"
           autoComplete="off"
@@ -45,7 +45,7 @@ function SignUpForm(onLogin){
       </FormField>
       <FormField>
         <Label htmlFor="password">Password</Label>
-        <Input
+        <input
           type="password"
           id="password"
           value={password}
@@ -55,7 +55,7 @@ function SignUpForm(onLogin){
       </FormField>
       <FormField>
         <Label htmlFor="password">Password Confirmation</Label>
-        <Input
+        <input
           type="password"
           id="password_confirmation"
           value={passwordConfirmation}
