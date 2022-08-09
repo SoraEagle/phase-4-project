@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 
 function LoginForm({onLogin}){
     const [username, setUsername] = useState("");
@@ -6,15 +7,18 @@ function LoginForm({onLogin}){
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const navigate = useNavigate();
+
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
+        if @current
         fetch("/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({username, password}),
         }).then((r) => {
             setIsLoading(false);
             if (r.ok){
@@ -26,7 +30,7 @@ function LoginForm({onLogin}){
     }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <div onSubmit={handleSubmit}>
             <form>
                 <label htmlFor="username">Username</label>
                 <input
@@ -57,7 +61,16 @@ function LoginForm({onLogin}){
                     <error key={err}>{err}</error>
                 ))}
             </form>
-        </form>
+            
+            <div>
+            <p>
+            Don't have an account? &nbsp;
+            </p>
+            <button onClick={navigate("/SignUpForm")}>
+              Sign Up
+            </button>
+            </div> 
+        </div>
     );
 }
 

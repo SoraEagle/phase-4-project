@@ -1,15 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-const linkStyles = {
-    display: "inline-block",
-    width: "50px",
-    margin: "0px 30px 60px",
-    textDecoration: "underline",
-    border: "2px solid black"
-};
-
-function NavBar(user, setUser){
+function NavBar(setUser){
     function handleLogoutClick(){
         fetch("/api/logout", {method: "DELETE"}).then((r) => {
             if(r.ok){
@@ -19,15 +11,15 @@ function NavBar(user, setUser){
     }
     return(
         <div id="nav">
-            <NavLink style={linkStyles} to="/">
+            <Link id = "linkStyles" to="/">
                 Home
-            </NavLink>
-            <NavLink style={linkStyles} to="/hotels">
+            </Link>
+            <Link id = "linkStyles" to="/hotels">
                 Hotels
-            </NavLink>
-            {/* <NavLink style={linkStyles} to="/"> */}
+            </Link>
+            {/* <Link id = "linkStyles" to="/"> */}
                 {/* My Bookings */}
-            {/* </NavLink> */}
+            {/* </Link> */}
             <button onClick={handleLogoutClick}>
                 Log Out
             </button>

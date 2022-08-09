@@ -32,7 +32,7 @@ function SignUpForm(onLogin){
     }
   
   return(
-    <form onSubmit={handleSubmit}>
+    <div onSubmit={handleSubmit}>
       <form>
         <label htmlFor="username">Username</label>
         <input
@@ -71,7 +71,7 @@ function SignUpForm(onLogin){
           <error key={err}>{err}</error>
         ))}
       </form>
-    </form>
+    </div>
   );
 }
 
