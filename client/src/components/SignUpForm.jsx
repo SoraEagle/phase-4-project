@@ -33,8 +33,8 @@ function SignUpForm(onLogin){
   
   return(
     <form onSubmit={handleSubmit}>
-      <FormField>
-        <Label htmlFor="username">Username</Label>
+      <form>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           id="username"
@@ -42,9 +42,9 @@ function SignUpForm(onLogin){
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </FormField>
-      <FormField>
-        <Label htmlFor="password">Password</Label>
+      </form>
+      <form>
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
@@ -52,9 +52,9 @@ function SignUpForm(onLogin){
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
         />
-      </FormField>
-      <FormField>
-        <Label htmlFor="password">Password Confirmation</Label>
+      </form>
+      <form>
+        <label htmlFor="password">Password Confirmation</label>
         <input
           type="password"
           id="password_confirmation"
@@ -62,15 +62,15 @@ function SignUpForm(onLogin){
           onChange={(e) => setPasswordConfirmation(e.target.value)}
           autoComplete="current-password"
         />
-      </FormField>
-      <FormField>
-        <Button type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
-      </FormField>
-      <FormField>
+      </form>
+      <form>
+        <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+      </form>
+      <form>
         {errors.map((err) => (
-          <Error key={err}>{err}</Error>
+          <error key={err}>{err}</error>
         ))}
-      </FormField>
+      </form>
     </form>
   );
 }
