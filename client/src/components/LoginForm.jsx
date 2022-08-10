@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
 
-function LoginForm({onLogin}){
+function LoginForm({loginUser, loggedIn, setLoggedIn}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -12,21 +12,32 @@ function LoginForm({onLogin}){
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
-        if @current
-        fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({username, password}),
-        }).then((r) => {
-            setIsLoading(false);
-            if (r.ok){
-                r.json().then((user) => onLogin(user));
-            } else{
-                r.json().then((err) => setErrors(err.errors));
-            }
-        });
+
+        if(loggedIn){
+            fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({username, password}),
+            })
+            .then((r) => {
+                if(r.ok){
+                    r.json().then(data => {
+                        loginUser(data.user)
+                    })
+                }else{
+                    r.json().then((err) => setErrors(err.errors));
+                }
+                
+                // setIsLoading(false);
+                // if(r.ok){
+                //     r.json().then((user) => user(user));
+                // }else{
+                //     r.json().then((err) => setErrors(err.errors));
+                // }
+            });
+        }
     }
 
     return(

@@ -12,6 +12,22 @@ import SignUpForm from "./SignUpForm";
 
 function App(){
   const [user, setUser] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  
+  const loginUser = user => {
+    if(user){
+      setUser(user);
+      setLoggedIn(true);
+    }else{
+      setUser(null);
+      setLoggedIn(false);
+    }
+  }
+
+  const logOutUser = () => {
+    setUser({});
+    setLoggedIn(false);
+  }
 
   useEffect(() => {
     // auto-login
@@ -24,12 +40,12 @@ function App(){
   
   return(
       <Router>
-        <NavBar />
+        <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} logOutUser={logOutUser} />
         <Routes>
           <Route path={"/"} element={<Home />} />
-          <Route path={"/hotels"} element={<Hotels />} />
-          <Route path={"/login"} element={<LoginForm onLogin={setUser} />} />
-          <Route path={"/signup"} element={<SignUpForm />} />
+          <Route path={"/hotels"} element={<Hotels loggedIn={loggedIn} setLoggedIn={setLoggedIn} loginUser={loginUser} />} />
+          <Route path={"/login"} element={<LoginForm user={user} onLogin={setUser} />} />
+          <Route path={"/signup"} element={<SignUpForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} loginUser={loginUser} />} />
         </Routes>
         <Footer />
       </Router>
