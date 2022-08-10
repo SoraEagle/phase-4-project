@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :hotels, only: [:index]
+    resources :hotels, only: [:index, :show]
     get 'sessions/create'
     get 'sessions/destroy'
     post "/login", to: "sessions#create"
