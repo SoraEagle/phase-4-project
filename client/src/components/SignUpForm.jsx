@@ -36,31 +36,25 @@ function SignUpForm(onLogin){
       <form>
         <label htmlFor="username">Username</label>
         <input
-          type="text"
-          id="username"
-          autoComplete="off"
-          value={username}
+          type="text" id="username"
+          autoComplete="off" value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </form>
       <form>
         <label htmlFor="password">Password</label>
         <input
-          type="password"
-          id="password"
-          value={password}
+          type="password" id="password"
+          autoComplete="current-password" value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
         />
       </form>
       <form>
         <label htmlFor="password">Password Confirmation</label>
         <input
-          type="password"
-          id="password_confirmation"
-          value={passwordConfirmation}
+          type="password" id="password_confirmation"
+          autoComplete="current-password" value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
-          autoComplete="current-password"
         />
       </form>
       <form>
