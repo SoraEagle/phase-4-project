@@ -32,38 +32,40 @@ function SignUpForm(onLogin){
     }
   
   return(
-    <div onSubmit={handleSubmit}>
+    <div id='signup' onSubmit={handleSubmit}>
       <form>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text" id="username"
-          autoComplete="off" value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </form>
-      <form>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password" id="password"
-          autoComplete="current-password" value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </form>
-      <form>
-        <label htmlFor="password">Password Confirmation</label>
-        <input
-          type="password" id="password_confirmation"
-          autoComplete="current-password" value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-        />
-      </form>
-      <form>
-        <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
-      </form>
-      <form>
-        {errors.map((err) => (
-          <error key={err}>{err}</error>
-        ))}
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text" id="username"
+            autoComplete="off" value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password" id="password"
+            autoComplete="current-password" value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password Confirmation</label>
+          <input
+            type="password" id="password_confirmation"
+            autoComplete="current-password" value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+          />
+        </div>
+        <div>
+          <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
+        </div>
+        <div>
+          {errors.map((err) => (
+            <error key={err}>{err}</error>
+          ))}
+        </div>
       </form>
     </div>
   );
