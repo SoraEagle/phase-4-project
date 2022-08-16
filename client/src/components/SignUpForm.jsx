@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { baseUrl } from '../Globals';
 
 function SignUpForm(onLogin){
     const [username, setUsername] = useState("");
@@ -9,31 +10,36 @@ function SignUpForm(onLogin){
 
     function handleSubmit(e){
         e.preventDefault();
+
+        const strongParams = {
+          user: {
+            username,
+            password,
+            password_confirmation: passwordConfirmation
+          }
+        }
         setErrors([]);
         setIsLoading(true);
-        fetch("/api/signup", {
+        fetch(baseUrl + '/users', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            username,
-            password,
-            password_confirmation: passwordConfirmation,
-          })
+          body: JSON.stringify(strongParams)
         }).then((r) => {
           setIsLoading(false);
-          if (r.ok) {
-            r.json().then((user) => onLogin(user));
-          } else {
+          if (r.ok){
+            r.json().then((user) => onLogin(user.user));
+          } else{
             r.json().then((err) => setErrors(err.errors));
           }
         });
     }
   
   return(
-    <div id='signup' onSubmit={handleSubmit}>
-      <form>
+    <div id='signup'>
+      <h1>Create Your Account Here</h1>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
           <input

@@ -43,31 +43,29 @@ function LoginForm({loginUser, loggedIn, setLoggedIn}){
     return(
         <div onSubmit={handleSubmit}>
             <form>
-                <label htmlFor="username">Username</label>
-                <input
-                type="text"
-                id="username"
-                autoComplete="off"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                />
-            </form>
-            <form>
-                <label htmlFor="password">Password</label>
-                <input
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />
-            </form>
-            <form>
+                <div>
+                    <label htmlFor="username">Username</label>
+                    <input
+                    type="text"
+                    id="username"
+                    autoComplete="off"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
                 <button variant="fill" color="primary" type="submit">
                     {isLoading ? "Loading..." : "Login"}
                     </button>
-            </form>
-            <form>
                 {errors.map((err) => (
                     <error key={err}>{err}</error>
                 ))}
@@ -77,7 +75,7 @@ function LoginForm({loginUser, loggedIn, setLoggedIn}){
             <p>
             Don't have an account? &nbsp;
             </p>
-            <button onClick={navigate("/SignUpForm")}>
+            <button onClick={ () => navigate(`/signup/`) }>
               Sign Up
             </button>
             </div> 
