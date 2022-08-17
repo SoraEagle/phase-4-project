@@ -75,6 +75,10 @@ GEM
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     diff-lcs (1.4.4)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.10.0)
     ffi (1.15.1)
     globalid (0.4.2)
@@ -189,6 +193,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.12)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
+  dotenv-rails
   jwt
   listen (~> 3.3)
   pg (~> 1.1)
