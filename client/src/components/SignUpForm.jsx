@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { baseUrl } from '../Globals';
+import { baseUrl, headers } from '../Globals';
 
 function SignUpForm(onLogin){
     const [username, setUsername] = useState("");
@@ -22,9 +22,7 @@ function SignUpForm(onLogin){
         setIsLoading(true);
         fetch(baseUrl + '/users', {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers,
           body: JSON.stringify(strongParams)
         }).then((r) => {
           setIsLoading(false);
