@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-    resources :hotels, only: [:index, :show]
+    resources :hotels, only: [:index, :create, :show]
     resources :users
-    get 'sessions/create'
-    get 'sessions/destroy'
     post "/login", to: "sessions#create"
     delete "/logout", to: 'sessions#destroy'
     post "/signup", to: "users#create"
