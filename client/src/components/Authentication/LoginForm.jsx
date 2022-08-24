@@ -63,22 +63,13 @@ function LoginForm({loginUser, loggedIn, setLoggedIn, currentUser, onLogin}){
                     onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button variant="fill" color="primary" type="submit">
+                <button type="submit">
                     {isLoading ? "Loading..." : "Login"}
                     </button>
                 {errors.map((err) => (
                     <error key={err}>{err}</error>
                 ))}
             </form>
-            
-            <div>
-            <p>
-            Don't have an account? &nbsp;
-            </p>
-            <button onClick={ () => navigate(`/signup/`) }>
-              Sign Up
-            </button>
-            </div> 
         </div>
     );
 }

@@ -5,41 +5,40 @@ import Footer from "./Footer";
 import NavBar from "./Navigation/NavBar";
 import Home from "../pages/Home";
 import Hotels from "../pages/Hotels";
-import LoginForm from "./Authentication/LoginForm";
-import SignUpForm from "./Authentication/SignUpForm";
+import Login from "../pages/Login";
 
 function App(){
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-  
-  const loginUser = user => {
-      setCurrentUser(user);
-      setLoggedIn(true);
-  }
+  const [user, setUser] = useState(null);
 
-  const logOutUser = () => {
-    setCurrentUser({});
-    setLoggedIn(false);
-  }
+  // const logOutUser = () => {
+  //   setUser({});
+  //   setLoggedIn(false);
+  // }
 
   // useEffect(() => {
   //   // auto-login
   //   fetch("/api/me").then((r) => {
   //     if (r.ok) {
-  //       r.json().then((currentUser) => setCurrentUser(currentUser));
+  //       r.json().then((user) => setUser(user));
   //     }
   //   });
   // }, []);
+
+  if(!user) return(
+    <Router>
+      <NavBar user={user} setUser={setUser} />
+      <Login />
+      <Footer />
+    </Router>
+  )
   
   return(
       <Router>
-        {loggedIn ? <h1>Logged In!</h1> : null}
-        <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} logOutUser={logOutUser} />
+        {/* {loggedIn ? <h1>Logged In!</h1> : null} */}
+        <NavBar user={user} setUser={setUser} />
         <Routes>
           <Route path={"/"} element={<Home />} />
-          <Route path={"/hotels"} element={<Hotels loggedIn={loggedIn} setLoggedIn={setLoggedIn} loginUser={loginUser} />} />
-          <Route path={"/login"} element={<LoginForm currentUser={currentUser} onLogin={setCurrentUser} />} />
-          <Route path={"/signup"} element={<SignUpForm loginUser={loginUser} />} />
+          <Route path={"/hotels"} element={<Hotels />} />
         </Routes>
         <Footer />
       </Router>
