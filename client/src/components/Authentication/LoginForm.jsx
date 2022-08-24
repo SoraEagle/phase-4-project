@@ -14,7 +14,7 @@ function LoginForm({loginUser, loggedIn, setLoggedIn, currentUser, onLogin}){
         setIsLoading(true);
 
         if(loggedIn){
-            fetch("/api/login", {
+            fetch("/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
