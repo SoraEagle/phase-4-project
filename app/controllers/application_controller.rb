@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   before_action :authorized
 
   def encode_token(payload)
-    JWT.encode(payload, 'my_s3cr3t')
+    JWT.encode(payload, ENV['JWT_SECRET'])
   end
 
   def auth_header
@@ -30,6 +30,7 @@ class ApplicationController < ActionController::API
       # decoded_token=> [{"user_id"=>2}, {"alg"=>"HS256"}]
       # or nil if we can't decode the token
       user_id = decoded_token[0]['user_id']
+    end
   end
 
   def logged_in?
