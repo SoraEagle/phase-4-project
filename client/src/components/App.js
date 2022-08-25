@@ -27,7 +27,7 @@ function App(){
   if(!currentUser) return(
     <Router>
       <NavBar setCurrentUser={setCurrentUser} />
-      <Login onLogin={setCurrentUser} />
+      <Login onLogin={setCurrentUser} currentUser={currentUser} />
       <Footer />
     </Router>
   );

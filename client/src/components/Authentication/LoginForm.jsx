@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import {useNavigate} from 'react-router-dom';
 
-function LoginForm({loggedIn, setLoggedIn, onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
+function LoginForm({loggedIn, setLoggedIn, onLogin, user, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
 
     function handleSubmit(e){
         e.preventDefault();
@@ -16,20 +16,21 @@ function LoginForm({loggedIn, setLoggedIn, onLogin, username, setUsername, passw
                 body: JSON.stringify({username, password}),
             })
             .then((r) => {
-                if(r.ok){
-                    r.json().then(data => {
-                        onLogin(data.user)
-                    })
-                }else{
-                    r.json().then((err) => setErrors(err.errors));
-                }
-                
                 // setIsLoading(false);
                 // if(r.ok){
-                //     r.json().then((user) => user(user));
+                //     r.json().then(data => {
+                //         onLogin(data.user)
+                //     })
                 // }else{
                 //     r.json().then((err) => setErrors(err.errors));
                 // }
+                
+                setIsLoading(false);
+                if(r.ok){
+                    r.json().then((user) => user(user));
+                }else{
+                    r.json().then((err) => setErrors(err.errors));
+                }
             });
         }
     }

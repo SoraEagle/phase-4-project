@@ -22,23 +22,8 @@ class UsersController < ApplicationController
         # end
     end
 
-    # def update
-    #     if user.update(user_params)
-    #         render json: user
-    #     else render json: user.errors, status: :unprocessable_entity
-    #     end
-    # end
-
     # def destroy
     #     user.destroy
-    # end
-
-    # def get_current_user
-    #     if logged_in?
-    #         render json: current_user, status: :ok
-    #     else
-    #         render json: {message: ["Not Logged In"]}, status: :ok
-    #     end
     # end
 
     private

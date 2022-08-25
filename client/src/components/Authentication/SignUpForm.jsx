@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {baseUrl, headers} from '../../Globals';
 
-function SignUpForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
+function SignUpForm({onLogin, user, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     // const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
     function handleSubmit(e){
@@ -22,11 +22,17 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
           headers: headers,
           body: JSON.stringify(strongParams)
         })
-        .then(r => r.json())
-        .then(data => {
+        // .then(r => r.json())
+        // .then(data => {
+        //   setIsLoading(false);
+        //   onLogin(data.user)
+        //   // localStorage.setItem('token', data.token)
+        // });
+
+        .then((r) => {
           setIsLoading(false);
-          onLogin(data.user)
-          // localStorage.setItem('token', data.token)
+          if(r.ok) r.json().then((user) => onLogin(user));
+          else r.json().then((err) => setErrors(err.errors))
         });
     }
   

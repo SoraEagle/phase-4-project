@@ -2,7 +2,7 @@ import {useState} from "react";
 import LoginForm from "../components/Authentication/LoginForm";
 import SignUpForm from "../components/Authentication/SignUpForm";
 
-function Login({onLogin}){
+function Login({currentUser, onLogin}){
   const [showLogin, setShowLogin] = useState(true);
   const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -13,7 +13,7 @@ function Login({onLogin}){
     <div>
       {showLogin ? (
         <div>
-          <LoginForm onLogin={onLogin} 
+          <LoginForm currentUser={currentUser} onLogin={onLogin} 
           username={username} setUsername={setUsername} 
           password={password} setPassword={setPassword} 
           errors={errors} setErrors={setErrors} 
@@ -23,7 +23,7 @@ function Login({onLogin}){
         </div>
       ) : (
         <div>
-            <SignUpForm onLogin={onLogin} 
+            <SignUpForm currentUser={currentUser} onLogin={onLogin} 
             username={username} setUsername={setUsername} 
             password={password} setPassword={setPassword} 
             errors={errors} setErrors={setErrors} 
