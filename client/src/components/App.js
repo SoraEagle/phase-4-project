@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
 import Footer from "./Footer";
@@ -8,10 +8,10 @@ import Hotels from "../pages/Hotels";
 import Login from "../pages/Login";
 
 function App(){
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   // const logOutUser = () => {
-  //   setUser({});
+  //   setCurrentUser({});
   //   setLoggedIn(false);
   // }
 
@@ -19,23 +19,23 @@ function App(){
   //   // auto-login
   //   fetch("/api/me").then((r) => {
   //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
+  //       r.json().then((currentUser) => setCurrentUser(currentUser));
   //     }
   //   });
   // }, []);
 
-  if(!user) return(
+  if(!currentUser) return(
     <Router>
-      <NavBar user={user} setUser={setUser} />
-      <Login />
+      <NavBar setCurrentUser={setCurrentUser} />
+      <Login onLogin={setCurrentUser} />
       <Footer />
     </Router>
-  )
+  );
   
   return(
       <Router>
         {/* {loggedIn ? <h1>Logged In!</h1> : null} */}
-        <NavBar user={user} setUser={setUser} />
+        <NavBar setCurrentUser={setCurrentUser} />
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/hotels"} element={<Hotels />} />

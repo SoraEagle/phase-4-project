@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
 import {baseUrl, headers} from '../../Globals';
 
-function SignUpForm({onLogin}){
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+function SignUpForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     // const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e){
         e.preventDefault();
@@ -23,7 +19,6 @@ function SignUpForm({onLogin}){
         console.log(strongParams)
         fetch(baseUrl + '/users', {
           method: "POST",
-          mode: "no-cors",
           headers: headers,
           body: JSON.stringify(strongParams)
         })
@@ -31,7 +26,7 @@ function SignUpForm({onLogin}){
         .then(data => {
           setIsLoading(false);
           onLogin(data.user)
-          localStorage.setItem('token', data.token)
+          // localStorage.setItem('token', data.token)
         });
     }
   
