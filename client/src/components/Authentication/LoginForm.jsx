@@ -1,38 +1,24 @@
 import React from "react";
-import {useNavigate} from 'react-router-dom';
+import {baseUrl} from '../../Globals';
 
-function LoginForm({loggedIn, setLoggedIn, onLogin, user, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
-
+function LoginForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
-
-        if(loggedIn){
-            fetch("/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({username, password}),
-            })
-            .then((r) => {
-                // setIsLoading(false);
-                // if(r.ok){
-                //     r.json().then(data => {
-                //         onLogin(data.user)
-                //     })
-                // }else{
-                //     r.json().then((err) => setErrors(err.errors));
-                // }
-                
-                setIsLoading(false);
-                if(r.ok){
-                    r.json().then((user) => user(user));
-                }else{
-                    r.json().then((err) => setErrors(err.errors));
-                }
-            });
-        }
+        fetch(baseUrl + "/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username, password}),
+        }).then((r) => {
+            setIsLoading(false);
+            if(r.ok){
+                r.json().then((user) => user(user));
+            }else{
+                r.json().then((err) => setErrors(err.errors));
+            }
+        });
     }
 
     return(
@@ -60,10 +46,12 @@ function LoginForm({loggedIn, setLoggedIn, onLogin, user, username, setUsername,
                 </div>
                 <button type="submit">
                     {isLoading ? "Loading..." : "Login"}
-                    </button>
-                {errors.map((err) => (
-                    <error key={err}>{err}</error>
-                ))}
+                </button>
+                {/* <div>
+                    {errors.map((err) => (
+                        <label key={err}>{err}</label>
+                    ))}
+                </div> */}
             </form>
         </div>
     );

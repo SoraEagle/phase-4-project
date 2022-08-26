@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {baseUrl, headers} from '../../Globals';
 
-function SignUpForm({onLogin, user, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
+function SignUpForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     // const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
     function handleSubmit(e){
         e.preventDefault();
-
         const strongParams = {
           user: {
             username,
@@ -21,15 +20,7 @@ function SignUpForm({onLogin, user, username, setUsername, password, setPassword
           method: "POST",
           headers: headers,
           body: JSON.stringify(strongParams)
-        })
-        // .then(r => r.json())
-        // .then(data => {
-        //   setIsLoading(false);
-        //   onLogin(data.user)
-        //   // localStorage.setItem('token', data.token)
-        // });
-
-        .then((r) => {
+        }).then((r) => {
           setIsLoading(false);
           if(r.ok) r.json().then((user) => onLogin(user));
           else r.json().then((err) => setErrors(err.errors))
@@ -67,11 +58,11 @@ function SignUpForm({onLogin, user, username, setUsername, password, setPassword
         <div>
           <input type="submit" value={isLoading ? "Loading..." : "Sign Up"} />
         </div>
-        <div>
+        {/* <div>
           {errors.map((err) => (
-            <error key={err}>{err}</error>
+            <label key={err}>{err}</label>
           ))}
-        </div>
+        </div> */}
       </form>
     </div>
   );

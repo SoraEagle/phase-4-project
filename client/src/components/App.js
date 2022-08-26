@@ -10,11 +10,6 @@ import Login from "../pages/Login";
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
 
-  // const logOutUser = () => {
-  //   setCurrentUser({});
-  //   setLoggedIn(false);
-  // }
-
   // useEffect(() => {
   //   // auto-login
   //   fetch("/api/me").then((r) => {
