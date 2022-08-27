@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {baseUrl, headers} from '../../Globals';
 
 function SignUpForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
@@ -10,7 +10,7 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
           user: {
             username,
             password
-            // password_confirmation: passwordConfirmation
+            // password_confirmation: passwordConfirmation //Only used in SignUpForm
           }
         }
         setErrors([]);

@@ -13,7 +13,7 @@ function Login({currentUser, onLogin}){
     <div>
       {showLogin ? (
         <div>
-          <LoginForm currentUser={currentUser} onLogin={onLogin} 
+          <LoginForm onLogin={onLogin} 
           username={username} setUsername={setUsername} 
           password={password} setPassword={setPassword} 
           errors={errors} setErrors={setErrors} 
@@ -23,7 +23,7 @@ function Login({currentUser, onLogin}){
         </div>
       ) : (
         <div>
-            <SignUpForm currentUser={currentUser} onLogin={onLogin} 
+            <SignUpForm onLogin={onLogin} 
             username={username} setUsername={setUsername} 
             password={password} setPassword={setPassword} 
             errors={errors} setErrors={setErrors} 

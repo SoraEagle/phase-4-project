@@ -12,8 +12,8 @@ class UsersController < ApplicationController
     end
 
     def create
-        byebug
         user = User.create!(user_params)
+        byebug
         # if user.save
             # @token = encode_token({user_id: user.id})
         session[:user_id] = user.id
