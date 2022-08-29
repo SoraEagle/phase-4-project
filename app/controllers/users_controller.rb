@@ -12,13 +12,16 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.create!(user_params)
-        byebug
-        # if user.save
-            # @token = encode_token({user_id: user.id})
-        session[:user_id] = user.id
-        render json: {user: user}, status: :created
-        console.log("User")
+        # byebug
+        user = User.new(user_params)
+        if user.save 
+        # byebug
+            session[:user_id] = user.id
+            render json: user
+        else
+            byebug
+            render json: {errors: "Invalid username or password"}
+        end
         # end
     end
 
