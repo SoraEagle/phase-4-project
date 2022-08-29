@@ -6,6 +6,7 @@ import NavBar from "./Navigation/NavBar";
 import Home from "../pages/Home";
 import Hotels from "../pages/Hotels";
 import Login from "../pages/Login";
+import Bookings from "../pages/Bookings";
 
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
@@ -33,6 +34,7 @@ function App(){
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/hotels"} element={<Hotels />} />
+          <Route path={"/bookings"} element={<Bookings />} />
         </Routes>
         <Footer />
       </Router>

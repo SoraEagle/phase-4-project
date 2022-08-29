@@ -17,9 +17,9 @@ function NavBar(setCurrentUser){
             <Link id = "linkStyles" to="/hotels">
                 Hotels
             </Link>
-            {/* <Link id = "linkStyles" to="/"> */}
-                {/* My Bookings */}
-            {/* </Link> */}
+            <Link id = "linkStyles" to="/bookings">
+                My Bookings
+            </Link>
             <button onClick={handleLogoutClick}>
                 Log Out
             </button>
