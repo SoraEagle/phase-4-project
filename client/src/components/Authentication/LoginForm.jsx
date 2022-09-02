@@ -5,6 +5,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
+        debugger
         fetch(baseUrl + "/login", {
             method: "POST",
             headers: {
@@ -12,6 +13,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
             },
             body: JSON.stringify({username, password}),
         }).then((r) => {
+            debugger
             setIsLoading(false);
             if(r.ok){
                 r.json().then((user) => onLogin(user));
@@ -47,11 +49,11 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
                 <button type="submit">
                     {isLoading ? "Loading..." : "Login"}
                 </button>
-                {/* <div>
+                <div>
                     {errors.map((err) => (
                         <label key={err}>{err}</label>
                     ))}
-                </div> */}
+                </div>
             </form>
         </div>
     );
