@@ -16,14 +16,18 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
         setErrors([]);
         setIsLoading(true);
         console.log(strongParams)
+        debugger
         fetch(baseUrl + '/users', {
           method: "POST",
           headers: headers,
           body: JSON.stringify(strongParams)
         }).then((r) => {
+          debugger
           setIsLoading(false);
           if(r.ok) r.json().then((user) => onLogin(user));
-          else r.json().then((err) => setErrors(err.errors))
+          else {
+            setIsLoading(false);
+            r.json().then((err) => setErrors(err.errors))}
         });
     }
   
