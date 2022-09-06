@@ -1,12 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-function NavBar(setCurrentUser){
+function NavBar({setCurrentUser}){
     function handleLogoutClick(){
-        fetch("/api/logout", {method: "DELETE"}).then((r) => {
-            if(r.ok){
-                setCurrentUser(null);
-            }
+        fetch("/logout", {method: "DELETE"}).then((r) => {
+            debugger;
+            if(r.ok) setCurrentUser(null);
         });
     }
     return(
