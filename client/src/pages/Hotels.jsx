@@ -1,16 +1,10 @@
-import react from "react";
+import React from "react";
 import Hotel from "../components/Hotel";
 
 function Hotels(){
     return(
-        <div id="hotels">
-            <h2 style={{
-                borderBottom: "2px solid black",
-                marginBottom: "12px",
-                marginTop: "12px",
-              }}>
-                Feel free to browse our selection of premium hotels:
-              </h2>
+        <div>
+            <h2>Feel free to browse our selection of premium hotels:</h2>
 
             {/* show component listing each individual Hotel */}
             <Hotel />
