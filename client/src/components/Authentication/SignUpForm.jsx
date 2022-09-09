@@ -17,7 +17,7 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
         setIsLoading(true);
         console.log(strongParams)
         debugger
-        fetch(baseUrl + '/users', {
+        fetch('/users', {
           method: "POST",
           headers: headers,
           body: JSON.stringify(strongParams)

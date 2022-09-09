@@ -8,6 +8,24 @@ function Login({currentUser, onLogin}){
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    console.log("Login.jsx currentUser: " + currentUser);
+
+    // if(showLogin == true) {
+    //   console.log("Login.jsx to LoginForm.jsx:");
+    //   console.log(<LoginForm onLogin={onLogin} 
+    //     username={username} setUsername={setUsername} 
+    //     password={password} setPassword={setPassword} 
+    //     errors={errors} setErrors={setErrors} 
+    //     isLoading={isLoading} setIsLoading={setIsLoading} />);
+    // }
+    // else {
+    //   console.log("Login.jsx to SignUpForm.jsx:");
+    //   console.log(<SignUpForm onLogin={onLogin} 
+    //     username={username} setUsername={setUsername} 
+    //     password={password} setPassword={setPassword} 
+    //     errors={errors} setErrors={setErrors} 
+    //     isLoading={isLoading} setIsLoading={setIsLoading} />);
+    // }
 
   return(
     <div>

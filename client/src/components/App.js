@@ -10,12 +10,15 @@ import Bookings from "../pages/Bookings";
 
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
+  console.log("App.js");
 
   useEffect(() => {
     // auto-login
-    fetch("/api/me").then((r) => {
+    fetch("/me").then((r) => {
+      console.log("App.js useEffect fetch /me");
       if (r.ok){
         r.json().then((currentUser) => setCurrentUser(currentUser));
+        console.log("App.js currentUser: " + currentUser);
       }
     });
   }, []);

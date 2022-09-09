@@ -1,23 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Hotel from "../components/Hotel";
 
 function Hotels(){
+  const {hotels, setHotels} = useState([]);
+
+  useEffect(() => {
+    fetch("/hotels")
+    .then((r) => r.json())
+    // .then((info) => console.log("info from fetch within Hotels.js", info));
+    .then(setHotels);
+    console.log("Hotels.jsx hotels: " + hotels);
+  }, []);
+  console.log("Hotels output within Hotels.js: ", hotels)
+  
     return(
         <div>
             <h2>Feel free to browse our selection of premium hotels:</h2>
 
-            {/* show component listing each individual Hotel */}
-            <Hotel />
-
-            {/* {(hotels.length === 0)? (
-          <div>
-          <h1>There are no hotels available!</h1>
-          <img src="https://cdn1.vectorstock.com/i/1000x1000/99/50/beach-cartoon-vector-1599950.jpg" alt="null"/>
-          </div>
-          ) : (
-            <div id="hotels">
-              {hotels.map((item) => {return <h5 key={item.id}><Item item={item} /></h5>})}
-            </div>)} */}
+            {/* show component listing each individual Hotel */}            
+            {
+            // (hotels.length === 0) ? (
+            //   <h2>Sorry, looks like we ran into a problem!</h2>
+            // ) : (
+            //   <div>
+            //     {/* {hotels.map((hotel) => {return <h5 key={hotel.id}><Hotel /></h5>})} */}
+            //   </div>
+            // )
+            }
         </div>
     );
 }

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create, :show]
     # before_action :set_user, only: [:show, :update, :destroy]
 
     # def index
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
             render json: user
         else
             byebug
+            console.log()
             render json: {errors: "Invalid username or password"}
         end
         # end
@@ -30,10 +31,6 @@ class UsersController < ApplicationController
     # end
 
     private
-    # def set_user
-    #     user = User.find(params[:id])
-    # end
-
     def user_params
         params.require(:user).permit(:username, :password)
     end

@@ -1,27 +1,29 @@
 import React from "react";
-import {baseUrl} from '../../Globals';
 
 function LoginForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
-        debugger
-        fetch(baseUrl + "/login", {
+        // debugger
+        fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({username, password}),
         }).then((r) => {
-            debugger
+            // debugger
             setIsLoading(false);
             if(r.ok){
                 r.json().then((user) => onLogin(user));
+                console.log("in");
             }else{
                 r.json().then((err) => setErrors(err.errors));
             }
         });
     }
+
+    // console.log("LoginForm.jsx Username: " + username, " Password: " + password);
 
     return(
         <div onSubmit={handleSubmit}>

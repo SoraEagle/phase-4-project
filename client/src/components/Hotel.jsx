@@ -4,7 +4,8 @@ function Hotel() {
   return (
     <div id='hotels'>
         {/* Show Hotel info */}
-        <p>{Hotel.city}, {Hotel.country}</p>
+        <p>{Hotel.name},{Hotel.city}, {Hotel.country}</p>
+        <button>Book Now</button>
     </div>
   )
 }
