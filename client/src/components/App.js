@@ -12,6 +12,9 @@ function App(){
   const [currentUser, setCurrentUser] = useState(null);
   console.log("App.js");
 
+  const [hotels, setHotels] = useState([]);
+  console.log("Hotels: ", hotels);
+
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
@@ -21,6 +24,14 @@ function App(){
         console.log("App.js currentUser: " + currentUser);
       }
     });
+    fetch("/hotels").then((r) => {
+      if(r.ok){
+        r.json().then((data) => {
+          console.log("Hotels: ", data);
+          setHotels(data);
+        })
+      }
+    })
   }, []);
 
   if(!currentUser) return(
@@ -35,9 +46,9 @@ function App(){
         {currentUser ? <h1>Logged In!</h1> : null}
         <NavBar setCurrentUser={setCurrentUser} />
         <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route path={"/hotels"} element={<Hotels />} />
-          <Route path={"/bookings"} element={<Bookings />} />
+          <Route path={"/"} element={<Home currentUser={currentUser} />} />
+          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} hotels={hotels} />} />
+          <Route path={"/bookings"} element={<Bookings currentUser={currentUser} />} />
         </Routes>
         <Footer />
       </Router>

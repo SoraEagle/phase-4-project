@@ -1,10 +1,11 @@
 import React from 'react'
 
-function Hotel() {
-  return (
+function Hotel({hotel}){
+  return(
     <div id='hotels'>
         {/* Show Hotel info */}
-        <p>{Hotel.name},{Hotel.city}, {Hotel.country}</p>
+        {/* Display if currentUser has already booked a room in that Hotel... */}
+        <p>{hotel.name},{hotel.city}, {hotel.country}</p>
         <button>Book Now</button>
     </div>
   )

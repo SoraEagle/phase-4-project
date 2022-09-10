@@ -8,7 +8,7 @@ function Login({currentUser, onLogin}){
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    console.log("Login.jsx currentUser: " + currentUser);
+    // console.log("Login.jsx currentUser: " + currentUser);
 
     // if(showLogin == true) {
     //   console.log("Login.jsx to LoginForm.jsx:");

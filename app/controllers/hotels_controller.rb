@@ -1,7 +1,7 @@
 class HotelsController < ApplicationController
     # skip_before_action :set_hotel, only: [:show]
     def index
-        byebug
+        # byebug
         @hotels = Hotel.all
         render json: @hotels
     end

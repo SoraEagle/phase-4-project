@@ -16,7 +16,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
             setIsLoading(false);
             if(r.ok){
                 r.json().then((user) => onLogin(user));
-                console.log("in");
+                console.log("Logged in");
             }else{
                 r.json().then((err) => setErrors(err.errors));
             }
