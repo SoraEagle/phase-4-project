@@ -6,7 +6,7 @@ function NavBar({setCurrentUser}){
     function handleLogoutClick(){
         fetch("/logout", {method: "DELETE"}).then((r) => {
             console.log("NavBar.js handleLogoutClick");
-            debugger;
+            // debugger;
             if(r.ok) setCurrentUser(null);
         });
         console.log("Log Out");
