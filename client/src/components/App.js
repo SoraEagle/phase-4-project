@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {HotelsProvider} from "../context/hotelsList";
 import './App.css';
 import Footer from "./Footer";
 import NavBar from "./Navigation/NavBar";
@@ -42,16 +43,18 @@ function App(){
   );
   
   return(
+    <HotelsProvider>
       <Router>
         {currentUser ? <h1>Logged In!</h1> : null}
         <NavBar setCurrentUser={setCurrentUser} />
         <Routes>
           <Route path={"/"} element={<Home currentUser={currentUser} />} />
-          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} hotels={hotels} />} />
+          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} hotels={hotels} setHotels={setHotels} />} />
           <Route path={"/bookings"} element={<Bookings currentUser={currentUser} />} />
         </Routes>
         <Footer />
       </Router>
+      </HotelsProvider>
   );
 }
 
