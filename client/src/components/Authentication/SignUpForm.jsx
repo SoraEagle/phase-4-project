@@ -1,5 +1,5 @@
 import React from 'react';
-import {baseUrl, headers} from '../../Globals';
+import {headers} from '../../Globals';
 
 function SignUpForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     // const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -16,13 +16,13 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
         setErrors([]);
         setIsLoading(true);
         console.log(strongParams)
-        debugger
+        // debugger
         fetch('/users', {
           method: "POST",
           headers: headers,
           body: JSON.stringify(strongParams)
         }).then((r) => {
-          debugger
+          // debugger
           setIsLoading(false);
           if(r.ok) r.json().then((user) => onLogin(user));
           else {

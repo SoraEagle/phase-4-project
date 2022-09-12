@@ -19,8 +19,7 @@ class UsersController < ApplicationController
             session[:user_id] = user.id
             render json: user
         else
-            byebug
-            console.log()
+            # byebug
             render json: {errors: "Invalid username or password"}
         end
         # end
