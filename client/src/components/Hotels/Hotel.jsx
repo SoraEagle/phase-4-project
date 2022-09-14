@@ -10,9 +10,11 @@ function Hotel({currentUser, hotel}){
     console.log("Deleting Hotel...");
     fetch(`http://localhost:3001/hotels/${hotel.id}`, { // DELETE fetch request.
     method: "DELETE",
-})
-.then((r) => r.json())
-.then(() => onDeleteHotel(hotel)); // Invoke the onDeleteTrip function with this fetch request.
+    })
+    .then((r) => {
+      console.log("Hotel.jsx hotel id: ", hotel.id); // Is undefined for some reason, until page is refreshed
+      if(r.ok) onDeleteHotel(hotel);
+    })
   }
 
   function onDeleteHotel(deletedHotel){

@@ -1,5 +1,5 @@
 class HotelSerializer < ActiveModel::Serializer
-  attributes :name, :company, :city, :country
+  attributes :id, :name, :company, :city, :country
 
   has_many :bookings
   has_many :users, through: :bookings
