@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 function NavBar({setCurrentUser}){
-    console.log("NavBar.js");
+    // console.log("NavBar.js");
     function handleLogoutClick(){
         fetch("/logout", {method: "DELETE"}).then((r) => {
             console.log("NavBar.js handleLogoutClick");

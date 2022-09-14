@@ -11,10 +11,13 @@ import Bookings from "../pages/Bookings";
 
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
-  console.log("App.js");
+  // console.log("App.js");
 
   const [hotels, setHotels] = useState([]);
-  console.log("Hotels: ", hotels);
+  // console.log("App.js Hotels: ", hotels);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     // auto-login
@@ -28,7 +31,7 @@ function App(){
     fetch("/hotels").then((r) => {
       if(r.ok){
         r.json().then((data) => {
-          console.log("Hotels: ", data);
+          console.log("App.js fetch Hotels: ", data);
           setHotels(data);
         })
       }
@@ -37,7 +40,7 @@ function App(){
 
   if(!currentUser) return(
     <Router>
-      <Login onLogin={setCurrentUser} currentUser={currentUser} />
+      <Login onLogin={setCurrentUser} currentUser={currentUser} isLoading={isLoading} setIsLoading={setIsLoading} errors={errors} setErrors={setErrors} />
       <Footer />
     </Router>
   );
@@ -49,7 +52,8 @@ function App(){
         <NavBar setCurrentUser={setCurrentUser} />
         <Routes>
           <Route path={"/"} element={<Home currentUser={currentUser} />} />
-          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} hotels={hotels} setHotels={setHotels} />} />
+          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} hotels={hotels} setHotels={setHotels} 
+          isLoading={isLoading} setIsLoading={setIsLoading} errors={errors} setErrors={setErrors} />} />
           <Route path={"/bookings"} element={<Bookings currentUser={currentUser} />} />
         </Routes>
         <Footer />
