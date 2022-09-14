@@ -5,8 +5,8 @@ import {HotelsContext} from "../context/hotelsList";
 
 function Hotels({currentUser, isLoading, setIsLoading, errors, setErrors}){
   const {hotels, setHotels} = useContext(HotelsContext);
-  console.log("Hotels output within Hotels.jsx: ", hotels);
-  console.log(currentUser);
+  // console.log("Hotels output within Hotels.jsx: ", hotels);
+  console.log("Hotels.jsx currentUser: ", currentUser);
   
   return(
     <div>
@@ -17,7 +17,7 @@ function Hotels({currentUser, isLoading, setIsLoading, errors, setErrors}){
       ) : (
         <div>
           <h2>Or feel free to browse our selection of premium hotels:</h2>
-          {hotels.map((hotel) => {return <h5><Hotel key={hotel.id} hotel={hotel} currentUser={currentUser} /></h5>})} {/* Component listing all hotels */}
+          {hotels.map((hotel) => {return <h5 key={hotel.id} ><Hotel hotel={hotel} currentUser={currentUser} /></h5>})} {/* Component listing all hotels */}
         </div>
       )}
     </div>

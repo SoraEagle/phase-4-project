@@ -12,7 +12,7 @@ function Hotel({currentUser, hotel}){
     method: "DELETE",
     })
     .then((r) => {
-      console.log("Hotel.jsx hotel id: ", hotel.id); // Is undefined for some reason, until page is refreshed
+      console.log("Hotel.jsx hotel id: ", hotel.id);
       if(r.ok) onDeleteHotel(hotel);
     })
   }
@@ -25,22 +25,31 @@ function Hotel({currentUser, hotel}){
   }
 
   function toggleBooking(){
-    setBooked(!booked);
+    // console.log("Booked: ", booked);
+    if(!booked){
+      currentUser.bookings.push(hotel);
+      setBooked((booked) => (!booked));
+      console.log("Booked: ", booked);
+    } else{
+      // Use .filter to remove hotel from currentUser.bookings
+      setBooked((booked) => (!booked));
+      console.log(currentUser.bookings);
+      console.log("Booked: ", booked);
+    }
+    // else currentUser.bookings = currentUser.bookings.filter((hotel) => )
     console.log("Hotel.jsx Hotel: ", hotel);
     console.log("Your Bookings: ", currentUser.bookings);
     // Add hotel to User's Bookings
   }
 
-  // Create a function to determine if the hotel is booked with the current user
   return(
     <div id='hotels'>
         <p>{hotel.name}</p><p>{hotel.city}, {hotel.country}</p>
-        {/* Toggling the Booking button toggles whether currentUser has booked in that Hotel */}
+        {/* Toggling the Booking button toggles whether currentUser has booked an room in that Hotel */}
         <button onClick={toggleBooking}>{booked ? ("Booked") : ("Book Now")}</button>
-        {/* Allow Hotels to be globally deleted */}
         <button onClick={deleteHotel}>Delete</button>
     </div>
   );
 }
 
-export default Hotel
+export default Hotel;
