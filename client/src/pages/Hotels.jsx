@@ -3,7 +3,7 @@ import Hotel from "../components/Hotels/Hotel";
 import NewHotel from "../components/Hotels/NewHotel";
 import {HotelsContext} from "../context/hotelsList";
 
-function Hotels({currentUser, isLoading, setIsLoading, errors, setErrors}){
+function Hotels({currentUser, isLoading, setIsLoading, errors, setErrors, booked, setBooked}){
   const {hotels, setHotels} = useContext(HotelsContext);
   // console.log("Hotels output within Hotels.jsx: ", hotels);
   console.log("Hotels.jsx currentUser: ", currentUser);
@@ -17,7 +17,8 @@ function Hotels({currentUser, isLoading, setIsLoading, errors, setErrors}){
       ) : (
         <div>
           <h2>Or feel free to browse our selection of premium hotels:</h2>
-          {hotels.map((hotel) => {return <h5 key={hotel.id} ><Hotel hotel={hotel} currentUser={currentUser} /></h5>})} {/* Component listing all hotels */}
+          {hotels.map((hotel) => {return <h5 key={hotel.id} ><Hotel hotel={hotel} currentUser={currentUser} booked={booked} setBooked={setBooked}
+          errors={errors} setErrors={setErrors} /></h5>})} {/* Component listing all hotels */}
         </div>
       )}
     </div>

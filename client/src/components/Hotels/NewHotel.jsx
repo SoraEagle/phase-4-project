@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {headers} from '../../Globals';
-import {HotelsContext} from "../../context/hotelsList";
 
 function NewHotel({hotels, setHotels, isLoading, setIsLoading, errors, setErrors}){
     const [name, setName] = useState('');
@@ -29,12 +28,14 @@ function NewHotel({hotels, setHotels, isLoading, setIsLoading, errors, setErrors
             country,
             company
           }),
-        }).then((r) => {
+        })
+        .then((r) => {
           setIsLoading(false);
           if(r.ok) return r.json()
-        else r.json().then((err) => {
-          console.log(err);
-          setErrors(err.errors)})
+          else r.json().then((err) => {
+            console.log(err);
+            setErrors(err.errors)
+          })
         })
         .then((data) => {
             console.log("NewHotel Hotels: ", data);
