@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
     resources :hotels
-    resources :users
-    resources :bookings
+    resources :users do
+      resources :bookings, only: [:index, :show, :destroy]
+      # resources :hotels
+    end
     post "/login", to: "sessions#create"
     delete "/logout", to: 'sessions#destroy'
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
+    
     # Routing logic: fallback requests for React Router.
     # Leave this here to help deploy your app later!
   
