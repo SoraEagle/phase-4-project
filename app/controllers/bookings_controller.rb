@@ -1,7 +1,9 @@
 class BookingsController < ApplicationController
     skip_before_action :authorize, only: [:create, :destroy]
     def index
-        render json: booking.all
+        if params[:user_id]
+            render json: current_user.bookings, include: :hotel
+        end
     end
 
     def show
@@ -9,7 +11,12 @@ class BookingsController < ApplicationController
     end
 
     def create
-        # 
+        booking = Booking.new(booking_params)
+        if booking.save
+            render json: booking, status: :created
+        else
+            render json: {errors: "Something went wrong!"}
+        end
     end
 
     def destroy

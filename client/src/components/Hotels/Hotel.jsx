@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {HotelsContext} from "../../context/hotelsList";
 import {BookingsContext} from "../../context/bookingsList";
 import {headers} from "../../Globals";
+
 function Hotel({currentUser, hotel, errors, setErrors}){
   const {bookings, setBookings} = useContext(BookingsContext);
   const {hotels, setHotels} = useContext(HotelsContext);
@@ -27,31 +28,37 @@ function Hotel({currentUser, hotel, errors, setErrors}){
 
   function toggleBooking(){
     // console.log("Booked: ", booked);
-    if(!booked){
-      currentUser.bookings.push(hotel);
+    if(booked){
+      // currentUser.bookings.push(hotel);
+      debugger
+      deleteBookings();
       setBooked((booked) => (!booked));
     } else{
-      // Use .filter to remove hotel from currentUser.bookings
+      debugger
+      currentUser.bookings.push(hotel);
+      postBookings();
       setBooked((booked) => (!booked));
     }
-
-    if(booked === true) postBookings();
-    else deleteBookings();
     
-    // else currentUser.bookings = currentUser.bookings.filter((hotel) => )
     console.log("Hotel.jsx Hotel: ", hotel);
     console.log("Your Bookings: ", bookings);
+    console.log("User's Bookings: ", currentUser.bookings);
     console.log("Booked: ", booked);
     // Add hotel to User's Bookings
   }
 
+  console.log("hotel.bookings: ", hotel.bookings);
+
   // Create function to POST bookings
   function postBookings(){
+    debugger
     fetch(`http://localhost:3001/users/${currentUser.id}/bookings`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
         //INPUT THE ATTRIBUTES!!!
+        name: (hotel.name),
+        city: (hotel.city)
       }),
     })
     .then((r) => {
@@ -62,6 +69,7 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       })
     })
     .then((data) => {
+      console.log("Data: ", data);
       setBookings([...bookings, data]);
       console.log("My Bookings: ", bookings);
     })
@@ -72,11 +80,11 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       method: "DELETE"
     })
     .then((r) => {
-      if(r.ok)onDeleteBooking(currentUser.bookings.booking);
+      if(r.ok)onDeleteBookings(currentUser.bookings.booking);
     })
   }
 
-  function onDeleteBooking(deletedBooking){
+  function onDeleteBookings(deletedBooking){
     const updatedBookings = bookings.filter((booking) => booking.id !== deletedBooking.id);
     setBookings(updatedBookings);
   }
