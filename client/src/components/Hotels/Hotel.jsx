@@ -28,37 +28,48 @@ function Hotel({currentUser, hotel, errors, setErrors}){
 
   function toggleBooking(){
     // console.log("Booked: ", booked);
-    if(booked){
-      // currentUser.bookings.push(hotel);
-      debugger
+    if(booked === true){
+      // debugger
       deleteBookings();
       setBooked((booked) => (!booked));
-    } else{
+    } else if(booked === false){
       debugger
       currentUser.bookings.push(hotel);
       postBookings();
       setBooked((booked) => (!booked));
+      console.log("User's Bookings: ", currentUser.bookings);
+      debugger
     }
     
-    console.log("Hotel.jsx Hotel: ", hotel);
-    console.log("Your Bookings: ", bookings);
-    console.log("User's Bookings: ", currentUser.bookings);
+    // console.log("Hotel.jsx Hotel: ", hotel);
+    // console.log("Your Bookings: ", bookings);
     console.log("Booked: ", booked);
     // Add hotel to User's Bookings
+    debugger
   }
 
   console.log("hotel.bookings: ", hotel.bookings);
 
   // Create function to POST bookings
   function postBookings(){
+    const newBooking={
+      user: (currentUser.id),
+      hotelId: (hotel.id),
+      name: (hotel.name),
+      city: (hotel.city),
+      country: (hotel.country)
+    }
     debugger
     fetch(`http://localhost:3001/users/${currentUser.id}/bookings`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
-        //INPUT THE ATTRIBUTES!!!
+        // newBooking
+        user: (currentUser.id),
+        hotelId: (hotel.id),
         name: (hotel.name),
-        city: (hotel.city)
+        city: (hotel.city),
+        country: (hotel.country)
       }),
     })
     .then((r) => {
