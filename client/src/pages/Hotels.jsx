@@ -3,15 +3,14 @@ import Hotel from "../components/Hotels/Hotel";
 import NewHotel from "../components/Hotels/NewHotel";
 import {HotelsContext} from "../context/hotelsList";
 
-function Hotels({currentUser, isLoading, setIsLoading, errors, setErrors, booked, setBooked}){
+function Hotels({currentUser, errors, setErrors, booked, setBooked}){
   const {hotels, setHotels} = useContext(HotelsContext);
-  // console.log("Hotels output within Hotels.jsx: ", hotels);
-  console.log("Hotels.jsx currentUser: ", currentUser);
+  // console.log("Hotels.jsx currentUser: ", currentUser);
   
   return(
     <div>
       <h2>Create a new Hotel Listing:</h2>
-      <NewHotel hotels={hotels} setHotels={setHotels} isLoading={isLoading} setIsLoading={setIsLoading} errors={errors} setErrors={setErrors} /> {/* Form to add Hotels */}
+      <NewHotel hotels={hotels} setHotels={setHotels} errors={errors} setErrors={setErrors} /> {/* Form to add Hotels */}
       {(!currentUser) ? (
         <h2>Sorry, looks like we ran into a problem!</h2>
       ) : (

@@ -6,7 +6,6 @@ function Login({currentUser, onLogin, isLoading, setIsLoading, errors, setErrors
   const [showLogin, setShowLogin] = useState(true);
   const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    // const [errors, setErrors] = useState([]);
 
   return(
     <div>

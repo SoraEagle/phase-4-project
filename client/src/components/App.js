@@ -18,7 +18,7 @@ function App(){
   // console.log("App.js Hotels: ", hotels);
 
   const [booked, setBooked] = useState(false);
-  console.log("App.js Booked: ", booked);
+  // console.log("App.js Booked: ", booked);
 
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
@@ -29,7 +29,6 @@ function App(){
       // console.log("App.js useEffect fetch /me");
       if (r.ok){
         r.json().then((currentUser) => setCurrentUser(currentUser));
-        console.log("App.js currentUser: ", currentUser);
       }
     });
     fetch("/hotels").then((r) => {
@@ -57,9 +56,9 @@ function App(){
         <Routes>
           <Route path={"/"} element={<Home currentUser={currentUser} />} />
           <Route path={"/hotels"} element={<Hotels currentUser={currentUser} 
-          isLoading={isLoading} setIsLoading={setIsLoading} errors={errors} setErrors={setErrors} />}
+          errors={errors} setErrors={setErrors} />}
           booked={booked} setBooked={setBooked} errors={errors} setErrors={setErrors} />
-          <Route path={"/bookings"} element={<Bookings currentUser={currentUser} />} />
+          <Route path={"/bookings"} element={<Bookings currentUser={currentUser} errors={errors} setErrors={setErrors} />} />
         </Routes>
         <Footer />
       </Router>

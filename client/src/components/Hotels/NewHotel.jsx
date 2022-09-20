@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {headers} from '../../Globals';
 
-function NewHotel({hotels, setHotels, isLoading, setIsLoading, errors, setErrors}){
+function NewHotel({hotels, setHotels, errors, setErrors}){
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e){
         e.preventDefault();
@@ -61,7 +62,7 @@ function NewHotel({hotels, setHotels, isLoading, setIsLoading, errors, setErrors
             <input type="text" name="company" autoComplete='off' placeholder='Company' value={company} onChange={(e) => setCompany(e.target.value)} />
         </div>
         <button type='submit'>{isLoading ? "Loading..." : "Submit"}</button>
-        {errors.map((err) => (
+        {errors?.map((err) => (
                         <label key={err}>{err}</label>
                     ))}
     </form>
