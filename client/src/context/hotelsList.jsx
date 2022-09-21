@@ -8,7 +8,6 @@ function HotelsProvider({children}){
         fetch("/hotels") // default GET fetch request to database
         .then((r) => r.json())
         .then((data) => setHotels(data)); // sets hotels
-        // console.log("hotelsList.jsx: data: ", hotels);
     }, [setHotels]);
 
   return(

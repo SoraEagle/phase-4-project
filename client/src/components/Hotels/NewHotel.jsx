@@ -18,7 +18,6 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
             city: (city),
             country: (country)
         }
-        console.log("newHotel: ", newHotel);
 
         fetch("http://localhost:3001/hotels", {
             method: "POST",
@@ -39,8 +38,7 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
           })
         })
         .then((data) => {
-            console.log("NewHotel Hotels: ", data);
-            console.log(newHotel);
+            console.log("newHotel: ", newHotel);
             setHotels([...hotels, data]);
         });
         setName('');

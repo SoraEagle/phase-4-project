@@ -7,10 +7,10 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   const {bookings, setBookings} = useContext(BookingsContext);
   const {hotels, setHotels} = useContext(HotelsContext);
   const [booked, setBooked] = useState(false);
+
+  // console.log("hotel: ", hotel);
   
   function deleteHotel(){
-    // debugger
-    console.log("Deleting Hotel...");
     fetch(`http://localhost:3001/hotels/${hotel.id}`, { // DELETE fetch request.
     method: "DELETE"
     })
@@ -20,56 +20,44 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   }
 
   function onDeleteHotel(deletedHotel){
-    // debugger
     const updatedHotels = hotels.filter((hotel) => hotel.id !== deletedHotel.id);
     setHotels(updatedHotels);
-    console.log("Hotel.jsx: Hotel has been deleted");
   }
 
-  function toggleBooking(){
-    // console.log("Booked: ", booked);
+  console.log(`${hotel.name}: Booked: `, booked);
+
+  function toggleBooking(e){
+    console.log("e.target: ", e.target.id);
     if(booked === true){
       // debugger
-      deleteBookings();
-      setBooked((booked) => (!booked));
+      const booking = bookings.find(booking => {return booking.hotel.id == e.target.id});
+      console.log("Booking.id: ", booking.id);
+      deleteBookings(booking.id);
+      // debugger
+      setBooked(!booked);
+      // debugger
     } else if(booked === false){
-      debugger
-      currentUser.bookings.push(hotel);
-      postBookings();
-      setBooked((booked) => (!booked));
-      console.log("User's Bookings: ", currentUser.bookings);
-      debugger
+      // postBookings();
+      setBooked(!booked);
+      // debugger
     }
     
-    // console.log("Hotel.jsx Hotel: ", hotel);
-    // console.log("Your Bookings: ", bookings);
-    console.log("Booked: ", booked);
-    // Add hotel to User's Bookings
-    debugger
+    console.log("Your Bookings: ", bookings);
+    // debugger
   }
 
-  console.log("hotel.bookings: ", hotel.bookings);
-
-  // Create function to POST bookings
   function postBookings(){
     const newBooking={
-      user: (currentUser.id),
-      hotelId: (hotel.id),
-      name: (hotel.name),
-      city: (hotel.city),
-      country: (hotel.country)
+      user_id: (currentUser.id),
+      hotel_id: (hotel.id)
     }
-    debugger
+    console.log("New Booking: ", newBooking);
+    // debugger
     fetch(`http://localhost:3001/users/${currentUser.id}/bookings`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
-        // newBooking
-        user: (currentUser.id),
-        hotelId: (hotel.id),
-        name: (hotel.name),
-        city: (hotel.city),
-        country: (hotel.country)
+        booking: newBooking
       }),
     })
     .then((r) => {
@@ -80,18 +68,16 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       })
     })
     .then((data) => {
-      console.log("Data: ", data);
       setBookings([...bookings, data]);
-      console.log("My Bookings: ", bookings);
     })
   }
   
-  function deleteBookings(){
-    fetch(`http://localhost:3001/users/${currentUser.id}/bookings`, {
+  function deleteBookings(bookingId){
+    fetch(`http://localhost:3001/users/${currentUser.id}/bookings/${bookingId}`, {
       method: "DELETE"
     })
     .then((r) => {
-      if(r.ok)onDeleteBookings(currentUser.bookings.booking);
+      if(r.ok)onDeleteBookings(bookings.id);
     })
   }
 
@@ -104,7 +90,7 @@ function Hotel({currentUser, hotel, errors, setErrors}){
     <div id='hotels'>
         <p>{hotel.name}</p><p>{hotel.city}, {hotel.country}</p>
         {/* Toggling the Booking button toggles whether currentUser has booked an room in that Hotel */}
-        <button onClick={toggleBooking}>{booked ? ("Booked") : ("Book Now")}</button>
+        <button id={hotel.id} onClick={toggleBooking}>{booked ? ("Booked") : ("Book Now")}</button>
         <button onClick={deleteHotel}>Delete</button>
     </div>
   );
