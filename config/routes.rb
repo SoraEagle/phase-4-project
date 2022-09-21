@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
     resources :hotels
     resources :users do
-      resources :bookings, only: [:index, :show, :destroy]
+      resources :bookings, only: [:index, :show, :create, :destroy]
       # resources :hotels
     end
     post "/login", to: "sessions#create"

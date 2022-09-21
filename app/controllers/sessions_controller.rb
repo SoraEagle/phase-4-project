@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   def create
     # byebug
     user = User.find_by(username: params[:username])
+    # binding.pry
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
       # byebug

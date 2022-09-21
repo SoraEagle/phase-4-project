@@ -2,8 +2,12 @@ class BookingsController < ApplicationController
     skip_before_action :authorize, only: [:create, :destroy]
     def index
         if params[:user_id]
-            render json: current_user.bookings, include: :hotel
+            user = User.find(params[:user_id])
+            bookings = user.bookings
+        else
+            bookings = Booking.all
         end
+        render json: bookings, include: :user
     end
 
     def show
@@ -11,6 +15,7 @@ class BookingsController < ApplicationController
     end
 
     def create
+        # byebug
         booking = Booking.new(booking_params)
         if booking.save
             render json: booking, status: :created
@@ -22,15 +27,21 @@ class BookingsController < ApplicationController
     def destroy
         # byebug
         set_booking
+        byebug
+        render json: @booking
+        byebug 
         @booking.destroy
+        byebug
     end
 
     private
     def set_booking
-        @booking = booking.find(params[:id])
+        @booking = Booking.find(params[:id])
+        # render json: @booking
+        byebug
     end
 
     def booking_params
-        params.require(:booking).permit(:hotel_id, :user_id)
+        params.require(:booking).permit(:hotel_id, :user_id, :id)
     end
 end
