@@ -25,23 +25,17 @@ class BookingsController < ApplicationController
     end
 
     def destroy
-        # byebug
-        set_booking
-        byebug
-        render json: @booking
-        byebug 
+        @booking = Booking.find(params[:id])
         @booking.destroy
-        byebug
+        # byebug
     end
 
     private
     def set_booking
         @booking = Booking.find(params[:id])
-        # render json: @booking
-        byebug
     end
 
     def booking_params
-        params.require(:booking).permit(:hotel_id, :user_id, :id)
+        params.require(:booking).permit(:id, :user_id, :hotel_id)
     end
 end

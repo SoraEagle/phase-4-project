@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {HotelsContext} from "../../context/hotelsList";
 import {BookingsContext} from "../../context/bookingsList";
 import {headers} from "../../Globals";
@@ -27,23 +27,22 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   console.log(`${hotel.name}: Booked: `, booked);
 
   function toggleBooking(e){
-    console.log("e.target: ", e.target.id);
-    if(booked === true){
+    // console.log("e.target: ", e.target.id);
+    // if(hotel.id == e.target.id) setBooked(true);
+    if(booked === true){ // change to check if user with id already has the hotel.id
       // debugger
+      console.log(hotel);
       const booking = bookings.find(booking => {return booking.hotel.id == e.target.id});
       console.log("Booking.id: ", booking.id);
       deleteBookings(booking.id);
       // debugger
       setBooked(!booked);
-      // debugger
     } else if(booked === false){
-      // postBookings();
+      postBookings();
       setBooked(!booked);
-      // debugger
     }
     
     console.log("Your Bookings: ", bookings);
-    // debugger
   }
 
   function postBookings(){
@@ -52,7 +51,6 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       hotel_id: (hotel.id)
     }
     console.log("New Booking: ", newBooking);
-    // debugger
     fetch(`http://localhost:3001/users/${currentUser.id}/bookings`, {
       method: "POST",
       headers: headers,
@@ -61,13 +59,18 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       }),
     })
     .then((r) => {
-      if(r.ok) return r.json()
+      // debugger
+      if(r.ok){
+        // debugger
+        return r.json()
+      }
       else r.json().then((err) => {
-        console.log(err);
+        // console.log(err);
         setErrors(err.errors)
       })
     })
     .then((data) => {
+      console.log("data: ", data);
       setBookings([...bookings, data]);
     })
   }
@@ -77,7 +80,7 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       method: "DELETE"
     })
     .then((r) => {
-      if(r.ok)onDeleteBookings(bookings.id);
+      if(r.ok)onDeleteBookings(bookingId);
     })
   }
 
@@ -89,9 +92,11 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   return(
     <div id='hotels'>
         <p>{hotel.name}</p><p>{hotel.city}, {hotel.country}</p>
-        {/* Toggling the Booking button toggles whether currentUser has booked an room in that Hotel */}
         <button id={hotel.id} onClick={toggleBooking}>{booked ? ("Booked") : ("Book Now")}</button>
         <button onClick={deleteHotel}>Delete</button>
+        {errors?.map((err) => (
+          <label key={err}>{err}</label>
+        ))}
     </div>
   );
 }
