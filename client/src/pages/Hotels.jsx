@@ -17,7 +17,7 @@ function Hotels({currentUser, errors, setErrors, booked, setBooked}){
         <div>
           <h2>Or feel free to browse our selection of premium hotels:</h2>
           {hotels.map((hotel) => {return <h5 key={hotel.id} ><Hotel hotel={hotel} currentUser={currentUser} booked={booked} setBooked={setBooked}
-          errors={errors} setErrors={setErrors} /></h5>})} {/* Component listing all hotels */}
+          errors={errors} setErrors={setErrors} /></h5>})}
         </div>
       )}
     </div>

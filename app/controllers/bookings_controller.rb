@@ -4,10 +4,13 @@ class BookingsController < ApplicationController
         if params[:user_id]
             user = User.find(params[:user_id])
             bookings = user.bookings
+            # byebug
         else
+            # byebug
             bookings = Booking.all
         end
-        render json: bookings, include: :user
+        # byebug
+        render json: bookings
     end
 
     def show

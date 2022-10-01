@@ -6,9 +6,7 @@ import {headers} from "../../Globals";
 function Hotel({currentUser, hotel, errors, setErrors}){
   const {bookings, setBookings} = useContext(BookingsContext);
   const {hotels, setHotels} = useContext(HotelsContext);
-  const [booked, setBooked] = useState(false);
-
-  // console.log("hotel: ", hotel);
+  const [booked, setBooked] = useState();
   
   function deleteHotel(){
     fetch(`http://localhost:3001/hotels/${hotel.id}`, { // DELETE fetch request.
@@ -24,75 +22,59 @@ function Hotel({currentUser, hotel, errors, setErrors}){
     setHotels(updatedHotels);
   }
 
-  console.log(`${hotel.name}: Booked: `, booked);
+  console.log(`${hotel.name}: Booked:  ${booked}`);
 
-  function toggleBooking(e){
-    // console.log("e.target: ", e.target.id);
-    // if(hotel.id == e.target.id) setBooked(true);
-    if(booked === true){ // change to check if user with id already has the hotel.id
-      // debugger
-      console.log(hotel);
-      const booking = bookings.find(booking => {return booking.hotel.id == e.target.id});
-      console.log("Booking.id: ", booking.id);
-      deleteBookings(booking.id);
-      // debugger
-      setBooked(!booked);
-    } else if(booked === false){
-      postBookings();
-      setBooked(!booked);
-    }
-    
-    console.log("Your Bookings: ", bookings);
-  }
+  // const booking = bookings.find(booking => {return booking.hotel.id == })
+  const booking = bookings.map((booking) => {
+    // console.log("Hotel's ID: ", hotel.id);
+    return booking;
+  });
 
+  useEffect(() => {
+    if(booked != true && booked != false) setBooked(false);
+  }, []);
+
+  // Step 2: Check if hotel is booked
+  // Step 3: set booking object to state
+  // Step 4: continue building the disable function
   function postBookings(){
+    console.log(booked);
     const newBooking={
       user_id: (currentUser.id),
       hotel_id: (hotel.id)
     }
-    console.log("New Booking: ", newBooking);
     fetch(`http://localhost:3001/users/${currentUser.id}/bookings`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
         booking: newBooking
       }),
-    })
-    .then((r) => {
-      // debugger
-      if(r.ok){
-        // debugger
-        return r.json()
-      }
-      else r.json().then((err) => {
-        // console.log(err);
-        setErrors(err.errors)
-      })
-    })
+    }).then((r) => r.json())
     .then((data) => {
+      // debugger
       console.log("data: ", data);
+      console.log("bookings: ", bookings);
       setBookings([...bookings, data]);
     })
-  }
-  
-  function deleteBookings(bookingId){
-    fetch(`http://localhost:3001/users/${currentUser.id}/bookings/${bookingId}`, {
-      method: "DELETE"
+    .catch((error) => {
+      console.error('Error:', error);
     })
-    .then((r) => {
-      if(r.ok)onDeleteBookings(bookingId);
-    })
+    setBooked(true);
   }
 
-  function onDeleteBookings(deletedBooking){
-    const updatedBookings = bookings.filter((booking) => booking.id !== deletedBooking.id);
-    setBookings(updatedBookings);
+  function isBooked(){ // Put into Booking button: disabled={isBooked()? true : false}
+    // debugger
+    if(booked) return true;
   }
+
+    let button;
+    if(booked === false) button = <button id={hotel.id} onClick={postBookings} disabled={isBooked()? true : false}>Book Now</button>
+    else button = true;
 
   return(
     <div id='hotels'>
         <p>{hotel.name}</p><p>{hotel.city}, {hotel.country}</p>
-        <button id={hotel.id} onClick={toggleBooking}>{booked ? ("Booked") : ("Book Now")}</button>
+        {button}
         <button onClick={deleteHotel}>Delete</button>
         {errors?.map((err) => (
           <label key={err}>{err}</label>

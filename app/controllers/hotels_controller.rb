@@ -1,6 +1,7 @@
 class HotelsController < ApplicationController
     skip_before_action :authorize, only: [:create, :destroy]
     def index
+        # byebug
         render json: Hotel.all
     end
 
@@ -11,7 +12,7 @@ class HotelsController < ApplicationController
     def create
         hotel = Hotel.new(hotel_params)
         if hotel.save
-                # byebug
+            # byebug
                 render json: hotel, status: :created
         else
             render json: {errors: "Something went wrong!"}
@@ -19,7 +20,6 @@ class HotelsController < ApplicationController
     end
 
     def destroy
-        # byebug
         set_hotel
         @hotel.destroy
     end

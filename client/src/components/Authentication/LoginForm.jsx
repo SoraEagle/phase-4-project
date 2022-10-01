@@ -3,6 +3,7 @@ import React from "react";
 function LoginForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     function handleSubmit(e){
         e.preventDefault();
+        console.log("submitting login request");
         setIsLoading(true);
         // debugger
         fetch("/login", {
@@ -12,7 +13,6 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
             },
             body: JSON.stringify({username, password}),
         }).then((r) => {
-            // debugger
             setIsLoading(false);
             if(r.ok){
                 r.json().then((user) => onLogin(user));
@@ -22,8 +22,6 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
             }
         });
     }
-
-    // console.log("LoginForm.jsx Username: " + username, " Password: " + password);
 
     return(
         <div onSubmit={handleSubmit}>
@@ -52,7 +50,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
                     {isLoading ? "Loading..." : "Login"}
                 </button>
                 <div>
-                    {errors.map((err) => (
+                    {errors?.map((err) => (
                         <label key={err}>{err}</label>
                     ))}
                 </div>

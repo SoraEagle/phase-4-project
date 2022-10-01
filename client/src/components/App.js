@@ -12,33 +12,24 @@ import Bookings from "./Hotels/Bookings";
 
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
-  // console.log("App.js");
-
   const [hotels, setHotels] = useState([]);
-  // console.log("App.js Hotels: ", hotels);
-
   const [booked, setBooked] = useState(false);
-  // console.log("App.js Booked: ", booked);
-
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    // auto-login
+  // console.log("rendered");
+  
+  useEffect(() => { // auto-login
+    // console.log("Is this Working?");
     fetch("/me").then((r) => {
-      // console.log("App.js useEffect fetch /me");
+      // console.log("Is this Still Working?");
+      // console.log(r.ok);
       if (r.ok){
+        // console.log("/me is looping?");
         r.json().then((currentUser) => setCurrentUser(currentUser));
+        // console.log(`Current User: ${currentUser}`);
       }
     });
-    fetch("/hotels").then((r) => {
-      if(r.ok){
-        r.json().then((data) => {
-          // console.log("App.js fetch Hotels: ", data);
-          setHotels(data);
-        })
-      }
-    })
   }, []);
 
   if(!currentUser) return(
@@ -58,7 +49,8 @@ function App(){
           <Route path={"/hotels"} element={<Hotels currentUser={currentUser} 
           errors={errors} setErrors={setErrors} />}
           booked={booked} setBooked={setBooked} errors={errors} setErrors={setErrors} />
-          <Route path={"/bookings"} element={<Bookings currentUser={currentUser} errors={errors} setErrors={setErrors} />} />
+          <Route path={"/bookings"} element={<Bookings currentUser={currentUser} errors={errors} setErrors={setErrors}
+          booked={booked} setBooked={setBooked} />} />
         </Routes>
         <Footer />
       </Router>

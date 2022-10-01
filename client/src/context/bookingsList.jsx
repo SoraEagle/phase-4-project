@@ -8,7 +8,7 @@ function BookingsProvider({children}){
         fetch("/me")
         .then((r) => r.json())
         .then((currentUser) => setBookings(currentUser.bookings));
-    }, [setBookings]);
+    }, []);
 
   return(
     <BookingsContext.Provider value={{bookings, setBookings}}>
