@@ -1,12 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {HotelsContext} from "../../context/hotelsList";
 import {BookingsContext} from "../../context/bookingsList";
+import EditHotel from './EditHotel';
 import {headers} from "../../Globals";
 
 function Hotel({currentUser, hotel, errors, setErrors}){
   const {bookings, setBookings} = useContext(BookingsContext);
   const {hotels, setHotels} = useContext(HotelsContext);
   const [booked, setBooked] = useState();
+  const [isEditing, setIsEditing] = useState(false);
   
   function deleteHotel(){
     fetch(`http://localhost:3001/hotels/${hotel.id}`, { // DELETE fetch request.
@@ -18,25 +20,17 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   }
 
   function onDeleteHotel(deletedHotel){
-    const updatedHotels = hotels.filter((hotel) => hotel.id !== deletedHotel.id);
-    setHotels(updatedHotels);
+    const updateHotels = hotels.filter((hotel) => hotel.id !== deletedHotel.id);
+    setHotels(updateHotels);
   }
-
-  console.log(`${hotel.name}: Booked:  ${booked}`);
-
-  const booking = bookings.map((booking) => {
-    // console.log("Hotel's ID: ", hotel.id);
-    return booking;
-  });
 
   useEffect(() => {
     if(booked != true && booked != false) setBooked(false);
-    console.log("Booking: ", booking);
 
     bookings.map((booking) => {
       if(booking.hotel.id === hotel.id) setBooked(true);
     })
-  }, []);
+  }, [bookings]);
 
   function postBookings(){
     console.log(booked);
@@ -52,7 +46,6 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       }),
     }).then((r) => r.json())
     .then((data) => {
-      // debugger
       console.log("data: ", data);
       console.log("bookings: ", bookings);
       setBookings([...bookings, data]);
@@ -63,23 +56,36 @@ function Hotel({currentUser, hotel, errors, setErrors}){
     setBooked(true);
   }
 
-  function isBooked(){ // Put into Booking button: disabled={isBooked()? true : false}
-    // debugger
-    if(booked) return true;
-  }
-
     let button;
-    if(booked === false) button = <button id={hotel.id} onClick={postBookings} disabled={isBooked()? true : false}>Book Now</button>
+    if(booked === false) button = <button id={hotel.id} onClick={postBookings}>Book Now</button>
     else button = true;
+
+    function handleUpdateHotel(updatedHotel){
+      setIsEditing(false);
+      const updatedHotels = hotels.map((hotel) => hotel.id === updatedHotel.id ? updatedHotel : hotel);
+      setHotels(updatedHotels)
+    }
 
   return(
     <div id='hotels'>
-        <p>{hotel.name}</p><p>{hotel.city}, {hotel.country}</p>
+      <div>
+        {console.log("isEditing: ", isEditing)}
+        {isEditing ? (
+        <EditHotel
+          hotel={hotel} onUpdateHotel={handleUpdateHotel}
+        />
+          ) : (
+            <div>
+          <h2 id="text">{hotel.name}</h2><h2>{hotel.city}, {hotel.country}</h2>
+          </div>
+        )}
         {button}
+        <button onClick={() => setIsEditing((isEditing) => !isEditing)}>Update</button>
         <button onClick={deleteHotel}>Delete</button>
         {errors?.map((err) => (
-          <label key={err}>{err}</label>
+        <label key={err}>{err}</label>
         ))}
+      </div>
     </div>
   );
 }
