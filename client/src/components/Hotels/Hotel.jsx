@@ -24,7 +24,6 @@ function Hotel({currentUser, hotel, errors, setErrors}){
 
   console.log(`${hotel.name}: Booked:  ${booked}`);
 
-  // const booking = bookings.find(booking => {return booking.hotel.id == })
   const booking = bookings.map((booking) => {
     // console.log("Hotel's ID: ", hotel.id);
     return booking;
@@ -32,11 +31,13 @@ function Hotel({currentUser, hotel, errors, setErrors}){
 
   useEffect(() => {
     if(booked != true && booked != false) setBooked(false);
+    console.log("Booking: ", booking);
+
+    bookings.map((booking) => {
+      if(booking.hotel.id === hotel.id) setBooked(true);
+    })
   }, []);
 
-  // Step 2: Check if hotel is booked
-  // Step 3: set booking object to state
-  // Step 4: continue building the disable function
   function postBookings(){
     console.log(booked);
     const newBooking={
