@@ -5,7 +5,6 @@ import {HotelsContext} from "../context/hotelsList";
 
 function Hotels({currentUser, errors, setErrors, booked, setBooked}){
   const {hotels, setHotels} = useContext(HotelsContext);
-  // console.log("Hotels.jsx currentUser: ", currentUser);
   
   return(
     <div>

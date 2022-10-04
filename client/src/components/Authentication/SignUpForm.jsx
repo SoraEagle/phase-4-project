@@ -51,22 +51,14 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
             onChange={e => setPassword(e.target.value)}
           />
         </div>
-        {/* <div>
-          <label htmlFor="password">Password Confirmation</label>
-          <input
-            type="password" id="password_confirmation" name="password_confirmation"
-            autoComplete="current-password" value={passwordConfirmation}
-            onChange={e => setPasswordConfirmation(e.target.value)}
-          />
-        </div> */}
         <div>
           <input type="submit" value={isLoading ? "Loading..." : "Sign Up"} />
         </div>
-        {/* <div>
-          {errors.map((err) => (
+        <div>
+          {errors?.map((err) => (
             <label key={err}>{err}</label>
           ))}
-        </div> */}
+        </div>
       </form>
     </div>
   );

@@ -12,22 +12,14 @@ import Bookings from "./Hotels/Bookings";
 
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
-  const [hotels, setHotels] = useState([]);
   const [booked, setBooked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
-
-  // console.log("rendered");
   
   useEffect(() => { // auto-login
-    // console.log("Is this Working?");
     fetch("/me").then((r) => {
-      // console.log("Is this Still Working?");
-      // console.log(r.ok);
       if (r.ok){
-        // console.log("/me is looping?");
         r.json().then((currentUser) => setCurrentUser(currentUser));
-        // console.log(`Current User: ${currentUser}`);
       }
     });
   }, []);

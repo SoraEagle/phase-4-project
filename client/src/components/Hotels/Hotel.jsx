@@ -11,18 +11,18 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   const [isEditing, setIsEditing] = useState(false);
   
   function deleteHotel(){
-    fetch(`http://localhost:3001/hotels/${hotel.id}`, { // DELETE fetch request.
+    fetch(`/hotels/${hotel.id}`, { // DELETE fetch request.
     method: "DELETE"
     })
-    .then((r) => {
-      if(r.ok) onDeleteHotel(hotel);
-    })
+    .then((r) => {if(r.ok) onDeleteHotel(hotel);})
   }
 
   function onDeleteHotel(deletedHotel){
-    const updateHotels = hotels.filter((hotel) => hotel.id !== deletedHotel.id);
-    setHotels(updateHotels);
+    const updatedHotels = hotels.filter((hotel) => hotel.id !== deletedHotel.id);
+    setHotels(updatedHotels);
   }
+
+  console.log(`${hotel.name}: Booked:  ${booked}`);
 
   useEffect(() => {
     if(booked != true && booked != false) setBooked(false);
@@ -32,13 +32,21 @@ function Hotel({currentUser, hotel, errors, setErrors}){
     })
   }, [bookings]);
 
+  function handleUpdateHotel(updatedHotel){
+    setIsEditing(false);
+    const updatedHotels = hotels.map((hotel) => hotel.id === updatedHotel.id ? updatedHotel : hotel);
+    debugger
+    setHotels(updatedHotels);
+    console.log("updatedHotel: ", updatedHotel);
+  }
+
   function postBookings(){
     console.log(booked);
     const newBooking={
       user_id: (currentUser.id),
       hotel_id: (hotel.id)
     }
-    fetch(`http://localhost:3001/users/${currentUser.id}/bookings`, {
+    fetch(`/users/${currentUser.id}/bookings`, { // POST fetch request
       method: "POST",
       headers: headers,
       body: JSON.stringify({
@@ -60,25 +68,17 @@ function Hotel({currentUser, hotel, errors, setErrors}){
     if(booked === false) button = <button id={hotel.id} onClick={postBookings}>Book Now</button>
     else button = true;
 
-    function handleUpdateHotel(updatedHotel){
-      setIsEditing(false);
-      const updatedHotels = hotels.map((hotel) => hotel.id === updatedHotel.id ? updatedHotel : hotel);
-      setHotels(updatedHotels)
-    }
-
   return(
     <div id='hotels'>
       <div>
-        {console.log("isEditing: ", isEditing)}
         {isEditing ? (
-        <EditHotel
-          hotel={hotel} onUpdateHotel={handleUpdateHotel}
-        />
-          ) : (
-            <div>
-          <h2 id="text">{hotel.name}</h2><h2>{hotel.city}, {hotel.country}</h2>
+        <EditHotel hotel={hotel} onUpdateHotel={handleUpdateHotel} />
+        ) : (
+          <div>
+            <h2 id="text">{hotel.name}</h2><h2 id='text'>{hotel.city}, {hotel.country}</h2>
           </div>
         )}
+
         {button}
         <button onClick={() => setIsEditing((isEditing) => !isEditing)}>Update</button>
         <button onClick={deleteHotel}>Delete</button>

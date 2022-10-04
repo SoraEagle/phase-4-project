@@ -19,7 +19,7 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
             country: (country)
         }
 
-        fetch("http://localhost:3001/hotels", {
+        fetch("/hotels", {
             method: "POST",
           headers: headers,
           body: JSON.stringify({

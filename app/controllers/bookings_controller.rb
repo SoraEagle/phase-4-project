@@ -4,12 +4,9 @@ class BookingsController < ApplicationController
         if params[:user_id]
             user = User.find(params[:user_id])
             bookings = user.bookings
-            # byebug
         else
-            # byebug
             bookings = Booking.all
         end
-        # byebug
         render json: bookings
     end
 
@@ -18,7 +15,6 @@ class BookingsController < ApplicationController
     end
 
     def create
-        # byebug
         booking = Booking.new(booking_params)
         if booking.save
             render json: booking, status: :created
@@ -30,7 +26,6 @@ class BookingsController < ApplicationController
     def destroy
         @booking = Booking.find(params[:id])
         @booking.destroy
-        # byebug
     end
 
     private

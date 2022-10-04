@@ -2,7 +2,6 @@ Rails.application.routes.draw do
     resources :hotels
     resources :users do
       resources :bookings, only: [:index, :show, :create, :destroy]
-      # resources :hotels
     end
     post "/login", to: "sessions#create"
     delete "/logout", to: 'sessions#destroy'
