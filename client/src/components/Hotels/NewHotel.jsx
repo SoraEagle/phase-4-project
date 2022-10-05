@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {headers} from '../../Globals';
 
-function NewHotel({hotels, setHotels, errors, setErrors}){
+function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [city, setCity] = useState('');
@@ -12,11 +12,15 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
         e.preventDefault();
         setIsLoading(true);
 
+        const creator = currentUser.username;
+        console.log("Creator: ", creator);
+
         const newHotel ={ // Variable for the Hotel that is created
             name: (name),
             company: (company),
             city: (city),
-            country: (country)
+            country: (country),
+            creator: (creator)
         }
 
         fetch("/hotels", {
@@ -26,7 +30,8 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
             name,
             city,
             country,
-            company
+            company,
+            creator
           }),
         })
         .then((r) => {
