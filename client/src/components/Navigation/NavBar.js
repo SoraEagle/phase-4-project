@@ -6,7 +6,6 @@ function NavBar({setCurrentUser}){
     function handleLogoutClick(){
         fetch("/logout", {method: "DELETE"}).then((r) => {
             console.log("NavBar.js handleLogoutClick");
-            // debugger;
             if(r.ok) setCurrentUser(null);
         });
         console.log("Log Out");
@@ -22,6 +21,7 @@ function NavBar({setCurrentUser}){
             <Link id = "linkStyles" to="/bookings">
                 My Bookings
             </Link>
+            <Link id = "linkStyles" to="/myHotels">My Hotels</Link>
             <button onClick={handleLogoutClick}>
                 Log Out
             </button>

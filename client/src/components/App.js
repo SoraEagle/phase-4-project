@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import Hotels from "../pages/Hotels";
 import Login from "../pages/Login";
 import Bookings from "./Hotels/Bookings";
+import MyHotels from "../pages/MyHotels";
 
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
@@ -34,6 +35,7 @@ function App(){
   return(
     <HotelsProvider><BookingsProvider>
       <Router>
+        <div id="App">
         {currentUser ? <h1>Logged In!</h1> : null}
         <NavBar setCurrentUser={setCurrentUser} />
         <Routes>
@@ -43,8 +45,10 @@ function App(){
           booked={booked} setBooked={setBooked} errors={errors} setErrors={setErrors} />
           <Route path={"/bookings"} element={<Bookings currentUser={currentUser} errors={errors} setErrors={setErrors}
           booked={booked} setBooked={setBooked} />} />
+          <Route path={"/myHotels"} element={<MyHotels />} />
         </Routes>
         <Footer />
+        </div>
       </Router>
       </BookingsProvider></HotelsProvider>
   );

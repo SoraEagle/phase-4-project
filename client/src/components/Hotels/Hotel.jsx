@@ -22,8 +22,6 @@ function Hotel({currentUser, hotel, errors, setErrors}){
     setHotels(updatedHotels);
   }
 
-  console.log(`${hotel.name}: Booked:  ${booked}`);
-
   useEffect(() => {
     if(booked != true && booked != false) setBooked(false);
 
@@ -35,13 +33,10 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   function handleUpdateHotel(updatedHotel){
     setIsEditing(false);
     const updatedHotels = hotels.map((hotel) => hotel.id === updatedHotel.id ? updatedHotel : hotel);
-    debugger
     setHotels(updatedHotels);
-    console.log("updatedHotel: ", updatedHotel);
   }
 
   function postBookings(){
-    console.log(booked);
     const newBooking={
       user_id: (currentUser.id),
       hotel_id: (hotel.id)
@@ -54,8 +49,6 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       }),
     }).then((r) => r.json())
     .then((data) => {
-      console.log("data: ", data);
-      console.log("bookings: ", bookings);
       setBookings([...bookings, data]);
     })
     .catch((error) => {
