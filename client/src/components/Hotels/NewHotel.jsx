@@ -1,37 +1,37 @@
 import React, {useState} from 'react';
 import {headers} from '../../Globals';
 
-function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
+function NewHotel({hotels, setHotels, errors, setErrors}){
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
+    // Add const [date, setDate] = useState();
     const [isLoading, setIsLoading] = useState(false);
+
+    console.log("user's hotels: ");
 
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
 
-        const creator = currentUser.username;
-        console.log("Creator: ", creator);
-
         const newHotel ={ // Variable for the Hotel that is created
-            name: (name),
-            company: (company),
-            city: (city),
-            country: (country),
-            creator: (creator)
+          name: (name),
+          company: (company),
+          city: (city),
+          country: (country)
         }
 
+        console.log(newHotel);
+
         fetch("/hotels", {
-            method: "POST",
+          method: "POST",
           headers: headers,
           body: JSON.stringify({
             name,
             city,
             country,
-            company,
-            creator
+            company
           }),
         })
         .then((r) => {
@@ -43,7 +43,7 @@ function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
           })
         })
         .then((data) => {
-            console.log("newHotel: ", newHotel);
+          console.log("newHotel: ", newHotel);
             setHotels([...hotels, data]);
         });
         setName('');
@@ -73,3 +73,21 @@ function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
 }
 
 export default NewHotel;
+
+/*
+Change name to NewBooking.jsx
+
+At least one reciprocal many-to-many relationship (implemented by using 2 has-many-through relationships). Note: in order to accomplish this, your project must include a joins table. 
+This joins table must include a user submittable attribute.
+	
+    Ideas:
+		  Date?
+      Price per night?
+
+Note: a user should only be able to edit and delete resources if they are logged in AND the creator of that resource. 
+	
+    Ideas:
+      Create a form for creating/editing/deleting Bookings
+      Edit only the user submittable attribute for Bookings
+			Expand the "Book Now" button into a booking form where stuff is filled out
+*/

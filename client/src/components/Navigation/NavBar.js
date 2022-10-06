@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 function NavBar({setCurrentUser}){
-    // console.log("NavBar.js");
     function handleLogoutClick(){
         fetch("/logout", {method: "DELETE"}).then((r) => {
             console.log("NavBar.js handleLogoutClick");
@@ -21,7 +20,6 @@ function NavBar({setCurrentUser}){
             <Link id = "linkStyles" to="/bookings">
                 My Bookings
             </Link>
-            <Link id = "linkStyles" to="/myHotels">My Hotels</Link>
             <button onClick={handleLogoutClick}>
                 Log Out
             </button>

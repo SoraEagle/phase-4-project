@@ -13,7 +13,7 @@ function EditHotel({hotel, onUpdateHotel}){
 
       const updateHotel = {name: (hotelName)}
   
-      fetch(`/hotels/${hotel.id}`, { // PATCH fetch request  is not currently working (404 Not Found)
+      fetch(`/hotels/${hotel.id}`, { // PATCH fetch request
       method: "PATCH",
       headers: headers,
       body: JSON.stringify({
@@ -38,3 +38,7 @@ function EditHotel({hotel, onUpdateHotel}){
   }
 
 export default EditHotel;
+
+/* 
+Change name to EditBooking.jsx 
+*/

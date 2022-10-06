@@ -9,7 +9,6 @@ import Home from "../pages/Home";
 import Hotels from "../pages/Hotels";
 import Login from "../pages/Login";
 import Bookings from "./Hotels/Bookings";
-import MyHotels from "../pages/MyHotels";
 
 function App(){
   const [currentUser, setCurrentUser] = useState(null);
@@ -20,7 +19,7 @@ function App(){
   useEffect(() => { // auto-login
     fetch("/me").then((r) => {
       if (r.ok){
-        r.json().then((currentUser) => setCurrentUser(currentUser));
+        r.json().then((currentUser) => setCurrentUser(currentUser)); // Sends the current user's info, including all associations.
       }
     });
   }, []);
@@ -40,12 +39,11 @@ function App(){
         <NavBar setCurrentUser={setCurrentUser} />
         <Routes>
           <Route path={"/"} element={<Home currentUser={currentUser} />} />
-          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} 
+          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} // 
           errors={errors} setErrors={setErrors} />}
           booked={booked} setBooked={setBooked} errors={errors} setErrors={setErrors} />
           <Route path={"/bookings"} element={<Bookings currentUser={currentUser} errors={errors} setErrors={setErrors}
           booked={booked} setBooked={setBooked} />} />
-          <Route path={"/myHotels"} element={<MyHotels />} />
         </Routes>
         <Footer />
         </div>

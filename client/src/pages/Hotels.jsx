@@ -1,15 +1,12 @@
 import React, {useContext} from "react";
 import Hotel from "../components/Hotels/Hotel";
-import NewHotel from "../components/Hotels/NewHotel";
 import {HotelsContext} from "../context/hotelsList";
 
 function Hotels({currentUser, errors, setErrors, booked, setBooked}){
   const {hotels, setHotels} = useContext(HotelsContext);
   
   return(
-    <div>
-      <h2>Create a new Hotel Listing:</h2>
-      <NewHotel currentUser={currentUser} hotels={hotels} setHotels={setHotels} errors={errors} setErrors={setErrors} /> {/* Form to add Hotels */}
+    <div id="hotels">
       {(!currentUser) ? (
         <h2>Sorry, looks like we ran into a problem!</h2>
       ) : (
@@ -24,3 +21,7 @@ function Hotels({currentUser, errors, setErrors, booked, setBooked}){
 }
 
 export default Hotels;
+
+/*
+Add form for creating Bookings here?  Or in Hotel.jsx?
+*/
