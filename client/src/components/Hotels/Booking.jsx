@@ -1,8 +1,9 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {BookingsContext} from '../../context/bookingsList';
 
 function Booking({booking, currentUser}){
   const {bookings, setBookings} = useContext(BookingsContext);
+  const [isEditing, setIsEditing] = useState(false);
 
   function deleteBookings(){
     fetch(`/users/${currentUser.id}/bookings/${booking.id}`, {
@@ -23,7 +24,8 @@ function Booking({booking, currentUser}){
   return(
     <div id='booking'>
       <p>{booking.hotel.name}</p><p>{booking.hotel.city}</p>
-      <button id='bookings_button' onClick={deleteBookings}>Cancel Booking</button>
+      <button>Update</button>
+      <button id='delete_button' onClick={deleteBookings}>Cancel Booking</button>
       </div>
   );
 }
@@ -41,7 +43,10 @@ This joins table must include a user submittable attribute.
 Note: a user should only be able to edit and delete resources if they are logged in AND the creator of that resource. 
 	
     Ideas:
-      Create a form for creating/editing/deleting Bookings
-      Edit only the user submittable attribute for Bookings
-			Expand the "Book Now" button into a booking form where stuff is filled out
+      On Booking.jsx:
+        Create a form for editing/deleting an Booking
+        Edit only the user submittable attribute for Bookings (date or dates)
+      On Hotel.jsx:
+			  Expand the "Book Now" button into a booking form where stuff is filled out
+        Have the User submit a valid date for the Booking
 */

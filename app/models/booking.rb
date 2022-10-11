@@ -4,4 +4,5 @@ class Booking < ApplicationRecord
 
     validates :hotel_id, presence: true
     validates :user_id, presence: true
+    # validates :date, presence: true
 end

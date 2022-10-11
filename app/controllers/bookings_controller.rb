@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
     skip_before_action :authorize, only: [:create, :destroy]
     def index
+        # byebug
         if params[:user_id]
             user = User.find(params[:user_id])
             bookings = user.bookings
@@ -16,10 +17,11 @@ class BookingsController < ApplicationController
 
     def create
         booking = Booking.new(booking_params)
+        # byebug
         if booking.save
             render json: booking, status: :created
         else
-            render json: {errors: "Something went wrong!"}
+            render json: {errors: "Something went wrong!"}, status: :unprocessable_entity
         end
     end
 
@@ -34,6 +36,6 @@ class BookingsController < ApplicationController
     end
 
     def booking_params
-        params.require(:booking).permit(:id, :user_id, :hotel_id)
+        params.require(:booking).permit(:id, :user_id, :hotel_id, :date)
     end
 end
