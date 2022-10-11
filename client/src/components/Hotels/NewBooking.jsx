@@ -50,8 +50,6 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
         <form onSubmit={handleDateSubmit}>
             <label>Start Date: </label>
             <input type="date" name='date' value={date} id='date' onChange={handleChange} /> {/* Make sure to add in name and value attributes!!! */}
-            {/* <label>End Date: </label> */}
-            {/* <input type="date" id='end_date' onChange={handleChange} /> */}
             <input type="submit" value="Submit" />
         </form>
     </div>

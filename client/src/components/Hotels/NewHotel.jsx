@@ -8,8 +8,6 @@ function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
     const [country, setCountry] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    // console.log("user's bookings: ", currentUser.bookings);
-
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
@@ -74,17 +72,4 @@ function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
 export default NewHotel;
 
 /*
-At least one reciprocal many-to-many relationship (implemented by using 2 has-many-through relationships). Note: in order to accomplish this, your project must include a joins table. 
-This joins table must include a user submittable attribute.
-	
-    Ideas:
-		  Date
-
-Note: a user should only be able to edit and delete resources if they are logged in AND the creator of that resource.
-  (Delete NewHotel.jsx???)
-	
-    Ideas:
-      Create a form for creating/editing/deleting Bookings
-      Edit only the user submittable attribute for Bookings
-			Expand the "Book Now" button into a booking form where stuff is filled out
 */

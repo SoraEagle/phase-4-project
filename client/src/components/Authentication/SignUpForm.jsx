@@ -2,7 +2,6 @@ import React from 'react';
 import {headers} from '../../Globals';
 
 function SignUpForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
-    // const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
     function handleSubmit(e){
         e.preventDefault();
@@ -10,7 +9,6 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
           user: {
             username,
             password
-            // password_confirmation: passwordConfirmation //Only used in SignUpForm
           }
         }
         setErrors([]);
@@ -30,6 +28,8 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
             r.json().then((err) => setErrors(err.errors))}
         });
     }
+
+    // Fix being able to ATTEMPT to sign up an User without an username or password, WITHOUT  erroring out...
   
   return(
     <div id='signup'>
