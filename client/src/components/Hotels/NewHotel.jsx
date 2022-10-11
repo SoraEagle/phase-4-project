@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
 import {headers} from '../../Globals';
 
-function NewHotel({hotels, setHotels, errors, setErrors}){
+function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    // Add const [date, setDate] = useState();
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log("user's hotels: ");
+    // console.log("user's bookings: ", currentUser.bookings);
 
     function handleSubmit(e){
         e.preventDefault();
@@ -75,16 +74,14 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
 export default NewHotel;
 
 /*
-Change name to NewBooking.jsx
-
 At least one reciprocal many-to-many relationship (implemented by using 2 has-many-through relationships). Note: in order to accomplish this, your project must include a joins table. 
 This joins table must include a user submittable attribute.
 	
     Ideas:
-		  Date?
-      Price per night?
+		  Date
 
-Note: a user should only be able to edit and delete resources if they are logged in AND the creator of that resource. 
+Note: a user should only be able to edit and delete resources if they are logged in AND the creator of that resource.
+  (Delete NewHotel.jsx???)
 	
     Ideas:
       Create a form for creating/editing/deleting Bookings

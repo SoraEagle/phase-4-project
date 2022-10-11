@@ -10,8 +10,7 @@ function EditHotel({hotel, onUpdateHotel}){
   
     function handleFormSubmit(e){
       e.preventDefault();
-
-      const updateHotel = {name: (hotelName)}
+      // const updateHotel = {name: (hotelName)}
   
       fetch(`/hotels/${hotel.id}`, { // PATCH fetch request
       method: "PATCH",
@@ -38,7 +37,3 @@ function EditHotel({hotel, onUpdateHotel}){
   }
 
 export default EditHotel;
-
-/* 
-Change name to EditBooking.jsx 
-*/

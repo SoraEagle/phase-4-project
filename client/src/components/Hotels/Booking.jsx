@@ -23,7 +23,7 @@ function Booking({booking, currentUser}){
 
   return(
     <div id='booking'>
-      <p>{booking.hotel.name}</p><p>{booking.hotel.city}</p>
+      <p>{booking.hotel.name}</p><p>{booking.hotel.city}</p><p>{booking.date}</p>
       <button>Update</button>
       <button id='delete_button' onClick={deleteBookings}>Cancel Booking</button>
       </div>
@@ -33,15 +33,7 @@ function Booking({booking, currentUser}){
 export default Booking;
 
 /*
-At least one reciprocal many-to-many relationship (implemented by using 2 has-many-through relationships). Note: in order to accomplish this, your project must include a joins table. 
-This joins table must include a user submittable attribute.
-	
-    Ideas:
-		  Date?
-      Price per night?
-
 Note: a user should only be able to edit and delete resources if they are logged in AND the creator of that resource. 
-	
     Ideas:
       On Booking.jsx:
         Create a form for editing/deleting an Booking
