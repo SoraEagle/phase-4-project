@@ -3,6 +3,7 @@ class CreateBookings < ActiveRecord::Migration[6.1]
     create_table :bookings do |t|
       t.integer :hotel_id
       t.integer :user_id
+      t.date :date
 
       t.timestamps
     end
