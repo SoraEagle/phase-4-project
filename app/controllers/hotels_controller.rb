@@ -4,10 +4,6 @@ class HotelsController < ApplicationController
         render json: Hotel.all
     end
 
-    def show
-        render json: @hotel
-    end
-
     def create
         hotel = Hotel.new(hotel_params)
         if hotel.save
@@ -17,23 +13,10 @@ class HotelsController < ApplicationController
         end
     end
 
-    def update
-        hotels = Hotel.find(params[:id])
-        hotels.update(name: params[:name])
-        render json: hotels
-    end
-
-    def destroy
-        set_hotel
-        @hotel.destroy
-    end
-
     private
-    def set_hotel
-        @hotel = Hotel.find(params[:id])
-    end
-
     def hotel_params
         params.require(:hotel).permit(:name, :city, :country, :company)
     end
 end
+
+# Make sure everything works properly!
