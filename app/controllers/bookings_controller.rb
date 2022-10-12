@@ -1,23 +1,19 @@
 class BookingsController < ApplicationController
     skip_before_action :authorize, only: [:create, :destroy]
     def index
-        # byebug
         if params[:user_id]
-            user = User.find(params[:user_id])
-            bookings = user.bookings
+            # Need to change to session hash
+            # user = User.find(params[:user_id])
+            bookings = set_user.bookings
         else
             bookings = Booking.all
         end
         render json: bookings
     end
 
-    def show
-        render json: @booking
-    end
-
     def create
-        booking = Booking.new(booking_params)
-        # byebug
+        # I should be using the user in the session hash
+        booking = set_user.bookings.new(booking_params)
         if booking.save
             render json: booking, status: :created
         else
@@ -26,16 +22,19 @@ class BookingsController < ApplicationController
     end
 
     def destroy
-        @booking = Booking.find(params[:id])
+        # Find the user
+        # Instead of hitting model, user.bookings
+        @booking = set_user.bookings.find(params[:id])
         @booking.destroy
     end
 
     private
-    def set_booking
-        @booking = Booking.find(params[:id])
+    def set_user # Method that finds the user in the session hash
+        return user = User.find(session[:user_id])
     end
 
-    def booking_params
-        params.require(:booking).permit(:id, :user_id, :hotel_id, :date)
+    def booking_params # Get rid of user_id
+        params.require(:booking).permit(:id, :hotel_id, :date)
     end
 end
+# Make sure everything works properly!

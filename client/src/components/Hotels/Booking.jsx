@@ -31,6 +31,3 @@ function Booking({booking, currentUser}){
 }
 
 export default Booking;
-
-/*
-*/
