@@ -1,25 +1,30 @@
 import React from "react";
+import {headers} from '../../Globals';
 
 function LoginForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     function handleSubmit(e){
         e.preventDefault();
         console.log("submitting login request");
         setIsLoading(true);
-        // debugger
         fetch("/login", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({username, password}),
-        }).then((r) => {
+            headers: headers,
+            body: JSON.stringify({username, password})
+        }).then((user) => {
             setIsLoading(false);
-            if(r.ok){
-                r.json().then((user) => onLogin(user));
-                console.log("Logged in");
-            }else{
-                r.json().then((err) => setErrors(err.errors));
-            }
+            // debugger
+            user.json().then((user) => {
+                if(user.errors){
+                    console.log("user.errors: ", user.errors);
+                    // debugger
+                    setErrors(user.errors);
+                    return errors;
+                } else{
+                    // debugger
+                    onLogin(user);
+                    console.log("Logged in");
+                }
+            });
         });
     }
 
@@ -33,7 +38,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
                     id="username"
                     autoComplete="off"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={e => setUsername(e.target.value)}
                     />
                 </div>
                 <div>
@@ -43,7 +48,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
                     id="password"
                     autoComplete="current-password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={e => setPassword(e.target.value)}
                     />
                 </div>
                 <button type="submit">
@@ -51,7 +56,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
                 </button>
                 <div>
                     {errors?.map((err) => (
-                        <label key={err}>{err}</label>
+                        <p key={err}>{err}</p>
                     ))}
                 </div>
             </form>
