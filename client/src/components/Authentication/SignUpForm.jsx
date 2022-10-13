@@ -4,32 +4,42 @@ import {headers} from '../../Globals';
 function SignUpForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
 
     function handleSubmit(e){
-        e.preventDefault();
-        const strongParams = {
-          user: {
-            username,
-            password
-          }
+      e.preventDefault();
+      
+      const strongParams = {
+        user: {
+          username,
+          password
         }
-        setErrors([]);
-        setIsLoading(true);
-        console.log(strongParams)
+      }
+
+      setIsLoading(true);
+      // console.log(strongParams)
+      // debugger
+      fetch('/users', {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(strongParams)
+      }).then((user) => {
+        setIsLoading(false);
         // debugger
-        fetch('/users', {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(strongParams)
-        }).then((r) => {
-          // debugger
-          setIsLoading(false);
-          if(r.ok) r.json().then((user) => onLogin(user));
-          else {
-            setIsLoading(false);
-            r.json().then((err) => setErrors(err.errors))}
+        user.json().then((user) => {
+          if(user.errors){ // If the user Object has errors:
+            console.log("user.errors: ", user.errors);
+            // debugger
+            setErrors(user.errors); // set the state of "errors" to user.errors
+            return errors;
+          } else{ // Otherwise, log in
+            // debugger
+            onLogin(user);
+            console.log("Signed up");
+          }
         });
+      });
+      // console.log("Errors: ", errors);
     }
 
-    // Fix being able to ATTEMPT to sign up an User without an username or password, WITHOUT  erroring out...
+    // Fix being able to ATTEMPT to sign up an User without an username or password, WITHOUT the page erroring out...
   
   return(
     <div id='signup'>
@@ -55,8 +65,8 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
           <input type="submit" value={isLoading ? "Loading..." : "Sign Up"} />
         </div>
         <div>
-          {errors?.map((err) => (
-            <label key={err}>{err}</label>
+          {errors?.map((error) => (
+            <p key={error}>{error}</p>
           ))}
         </div>
       </form>
