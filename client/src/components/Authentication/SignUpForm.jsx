@@ -14,7 +14,6 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
       }
 
       setIsLoading(true);
-      // console.log(strongParams)
       // debugger
       fetch('/users', {
         method: "POST",
@@ -25,18 +24,13 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
         // debugger
         user.json().then((user) => {
           if(user.errors){ // If the user Object has errors:
-            console.log("user.errors: ", user.errors);
-            // debugger
             setErrors(user.errors); // set the state of "errors" to user.errors
             return errors;
           } else{ // Otherwise, log in
-            // debugger
             onLogin(user);
-            console.log("Signed up");
           }
         });
       });
-      // console.log("Errors: ", errors);
     }
 
     // Fix being able to ATTEMPT to sign up an User without an username or password, WITHOUT the page erroring out...

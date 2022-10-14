@@ -4,10 +4,8 @@ import {Link} from 'react-router-dom';
 function NavBar({setCurrentUser}){
     function handleLogoutClick(){
         fetch("/logout", {method: "DELETE"}).then((r) => {
-            console.log("NavBar.js handleLogoutClick");
             if(r.ok) setCurrentUser(null);
         });
-        console.log("Log Out");
     }
     return(
         <div id="nav">

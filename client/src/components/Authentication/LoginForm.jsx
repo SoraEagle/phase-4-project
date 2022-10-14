@@ -4,7 +4,6 @@ import {headers} from '../../Globals';
 function LoginForm({onLogin, username, setUsername, password, setPassword, errors, setErrors, isLoading, setIsLoading}){
     function handleSubmit(e){
         e.preventDefault();
-        console.log("submitting login request");
         setIsLoading(true);
         fetch("/login", {
             method: "POST",
@@ -15,14 +14,12 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
             // debugger
             user.json().then((user) => {
                 if(user.errors){
-                    console.log("user.errors: ", user.errors);
                     // debugger
                     setErrors(user.errors);
                     return errors;
                 } else{
                     // debugger
                     onLogin(user);
-                    console.log("Logged in");
                 }
             });
         });

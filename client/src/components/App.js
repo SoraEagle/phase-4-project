@@ -36,7 +36,7 @@ function App(){
       <Router>
         <div id="App">
         {currentUser ? <h1>Logged In!</h1> : null}
-        <NavBar setCurrentUser={setCurrentUser} />
+        <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <Routes>
           <Route path={"/"} element={<Home currentUser={currentUser} />} />
           <Route path={"/hotels"} element={<Hotels currentUser={currentUser} // 
