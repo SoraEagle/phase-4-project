@@ -26,6 +26,7 @@ code {
 }
 
 #footer {
+  flex-grow: 1;
   flex-shrink: 0;
   background-color: whitesmoke;
   padding-top: 20px;
@@ -40,19 +41,21 @@ code {
 }
 
 #nav {
+  flex-grow: 1;
   border-bottom: 2px solid black;
   margin-bottom: 12px;
   width: 100%;
   height: 10%;
 }
 
-#notice-big-text {
-  color: red;
+#notice {
+  border-bottom: 2px solid black;
+  background-color: darksalmon;
+  color: ivory;
 }
 
-#edit-hotel {}
-
 #hotels {
+  flex-grow: 5;
   border-top: 2px solid black;
   margin-bottom: 12px;
   margin-top: 12px;
@@ -64,8 +67,6 @@ code {
   margin-bottom: 12px;
   margin-top: 12px;
 }
-
-#bookings {}
 
 #booking {
   border-bottom: 2px solid black;
