@@ -22,7 +22,9 @@ function Booking({booking, currentUser}){
 
   return(
     <div id='booking'>
-      <p>{booking.hotel.name}</p><p>{booking.hotel.city}</p><p>When: {booking.date}</p>
+      <p>{booking.hotel.name}</p>
+      <p>{booking.hotel.city}</p>
+      <p>When: {booking.date}</p>
       <button>Update</button>
       <button id='delete_button' onClick={deleteBookings}>Cancel Booking</button>
       </div>
