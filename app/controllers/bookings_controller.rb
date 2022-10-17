@@ -11,10 +11,14 @@ class BookingsController < ApplicationController
 
     def create
         booking = set_user.bookings.new(booking_params)
-        if booking.save
-            render json: booking, status: :created
+        if(booking.date)
+            if booking.save
+                render json: booking, status: :created
+            else
+                render json: {errors: booking.errors.full_messages}, status: :unauthorized
+            end
         else
-            render json: {errors: "Something went wrong!"}, status: :unprocessable_entity
+            render json: {errors: booking.errors.full_messages}, status: :unauthorized
         end
     end
 

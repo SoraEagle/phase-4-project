@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {headers} from '../../Globals';
 
-function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
+function NewHotel({hotels, setHotels, errors, setErrors}){
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [city, setCity] = useState('');
@@ -62,14 +62,13 @@ function NewHotel({currentUser, hotels, setHotels, errors, setErrors}){
             <input type="text" name="company" autoComplete='off' placeholder='Company' value={company} onChange={(e) => setCompany(e.target.value)} />
         </div>
         <button type='submit'>{isLoading ? "Loading..." : "Submit"}</button>
-        {errors?.map((err) => (
-                        <label key={err}>{err}</label>
-                    ))}
+        {
+          hotels.errors ? (errors?.map((err) => (
+            <label key={err}>{err}</label>
+        ))) : (null)
+        }
     </form>
   )
 }
 
 export default NewHotel;
-
-/*
-*/

@@ -7,40 +7,31 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
     function handleDateSubmit(e){
       e.preventDefault();
 
-      if(e.target.date.value != '' && e.target.date.value != undefined){
         const newBooking = { // Object to represent the new Booking Object
           user_id: (currentUser.id),
           hotel_id: (hotel.id),
           date: (date)
         }
 
-        console.log("newBooking: ", newBooking);
-
-        console.log("Submitting new Booking!");
         fetch(`/users/${currentUser.id}/bookings`, { // POST fetch request
         method: "POST",
         headers: headers,
         body: JSON.stringify({
           booking: newBooking
         }),
-        }).then((r) => {
-          if(r.ok) return r.json()
-          else r.json().then((err) => {
-            setErrors(err.errors);
-            console.log(err);
-            console.log(errors);
-          })
-        })
-        .then((data) => {
-          setBookings([...bookings, data]);
-          console.log("Bookings: ", bookings);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        })
-
-        setIsBooking(false);
-      } else console.log("That is not a valid Date!");
+        }).then((booking) => {
+          booking.json().then((booking) => {
+            if(booking.errors){
+              console.log("booking.errors: ", booking.errors);
+              setErrors(booking.errors);
+              return errors;
+            } else{
+              setBookings([...bookings, booking]);
+              setErrors(null);
+              setIsBooking(false);
+            }
+          });
+        });
     }
 
     const handleChange = (e) => { setDate(e.target.value); }

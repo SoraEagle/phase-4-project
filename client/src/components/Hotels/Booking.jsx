@@ -3,7 +3,6 @@ import {BookingsContext} from '../../context/bookingsList';
 
 function Booking({booking, currentUser}){
   const {bookings, setBookings} = useContext(BookingsContext);
-  const [isEditing, setIsEditing] = useState(false);
 
   function deleteBookings(){
     fetch(`/users/${currentUser.id}/bookings/${booking.id}`, {

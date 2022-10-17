@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {BookingsContext} from "../../context/bookingsList";
 import NewBooking from './NewBooking';
 
@@ -7,6 +7,7 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   const [isBooking, setIsBooking] = useState(false);
 
   function postBookings(){
+    console.log(hotel);
     setIsBooking(true);
   }
 
@@ -20,9 +21,12 @@ function Hotel({currentUser, hotel, errors, setErrors}){
       ) : (
         <button id={hotel.id} onClick={postBookings}>Book Now</button>
       )}
-      {errors?.map((err) => (
-      <label key={err}>{err}</label>
-      ))}
+      {
+      errors ?
+        (errors.map((err) => (
+        <label key={err}>{err}</label>
+        ))) : (null)
+      }
     </div>
   );
 }
