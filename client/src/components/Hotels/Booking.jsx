@@ -1,11 +1,19 @@
 import React, {useContext, useState} from 'react';
 import {BookingsContext} from '../../context/bookingsList';
+import EditBooking from './EditBooking';
 
-function Booking({booking, currentUser}){
+function Booking({booking, currentUser, date, setDate, errors, setErrors}){
   const {bookings, setBookings} = useContext(BookingsContext);
+  const [isEditing, setIsEditing] = useState(false);
+
+  function handleUpdateBooking(updatedBooking){
+    setIsEditing(false);
+    const updatedBookings = bookings.map((booking) => booking.id === updatedBooking.id ? updatedBooking : booking);
+    setBookings(updatedBookings);
+  }
 
   function deleteBookings(){
-    fetch(`/users/${currentUser.id}/bookings/${booking.id}`, {
+    fetch(`/bookings/${booking.id}`, {
       method: "DELETE"
     })
     .then((r) => {
@@ -22,10 +30,17 @@ function Booking({booking, currentUser}){
 
   return(
     <div id='booking'>
-      <p>{booking.hotel.name}</p>
-      <p>{booking.hotel.city}</p>
-      <p>When: {booking.date}</p>
-      <button>Update</button>
+      {isEditing ? (
+        <EditBooking booking={booking} bookings={bookings} setBookings={setBookings} currentUser={currentUser} isEditing={isEditing} 
+        setIsEditing={setIsEditing} date={date} setDate={setDate} errors={errors} setErrors={setErrors} onUpdateBooking={handleUpdateBooking} />
+      ) : (
+        <div>
+          <p>{booking.hotel.name}</p>
+          <p>{booking.hotel.city}</p>
+          <p>When: {booking.date}</p>
+        </div>
+      )}
+      <button id={booking.id} onClick={() => setIsEditing((isEditing) => !isEditing)}>Update</button>
       <button id='delete_button' onClick={deleteBookings}>Cancel Booking</button>
       </div>
   );

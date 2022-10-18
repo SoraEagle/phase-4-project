@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {headers} from '../../Globals';
 
-function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, errors, setErrors}){
-  const [date, setDate] = useState(new Date());
+function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, errors, setErrors, date, setDate}){
 
     function handleDateSubmit(e){
       e.preventDefault();
@@ -13,7 +12,7 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
           date: (date)
         }
 
-        fetch(`/users/${currentUser.id}/bookings`, { // POST fetch request
+        fetch(`/bookings`, { // POST fetch request
         method: "POST",
         headers: headers,
         body: JSON.stringify({
