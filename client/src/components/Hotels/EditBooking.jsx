@@ -1,22 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {headers} from '../../Globals';
 
-function EditBooking({booking, bookings, setBookings, currentUser, isEditing, setIsEditing, errors, setErrors, onUpdateBooking}){
+function EditBooking({booking, errors, setErrors, onUpdateBooking}){
     const [bookingDate, setBookingDate] = useState(booking.date);
 
     useEffect(() => {
         booking.date = bookingDate;
         setBookingDate(booking.date);
-        console.log("bookingDate: ", bookingDate);
-        console.log("booking: ", booking);
     }, [bookingDate]);
 
     function handleDateEdit(e){
         e.preventDefault();
 
-        console.log("e.target.date.value: ", e.target.date.value);
-
-        fetch(`/bookings/${booking.id}`, { // PATCH fetch request currently isn't working (unexpected end of JSON input)
+        fetch(`/bookings/${booking.id}`, {
             method: "PATCH",
             headers: headers,
             body: JSON.stringify({
@@ -25,8 +21,6 @@ function EditBooking({booking, bookings, setBookings, currentUser, isEditing, se
           })
             .then((r) => r.json())
             .then((data) => {
-              debugger
-              console.log("data: ", data);
               onUpdateBooking(data);
             });
     }
@@ -36,13 +30,12 @@ function EditBooking({booking, bookings, setBookings, currentUser, isEditing, se
             <label>Start Date: </label>
             <input type="date" name='date' value={bookingDate} onChange={(e) => setBookingDate(e.target.value)} />
             <input type="submit" value="Save" />
+            <div>
+                
+            </div>
         </form>
     </div>
   )
 }
 
 export default EditBooking;
-
-/*
-    Create the ability to edit the date
-*/

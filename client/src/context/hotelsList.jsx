@@ -5,9 +5,9 @@ const HotelsContext = React.createContext();
 function HotelsProvider({children}){
     const [hotels, setHotels] = useState([]);
     useEffect(() => {
-        fetch("/hotels") // default GET fetch request to database
+        fetch("/hotels")
         .then((r) => r.json())
-        .then((data) => setHotels(data)); // sets hotels
+        .then((data) => setHotels(data));
     }, [setHotels]);
 
   return(

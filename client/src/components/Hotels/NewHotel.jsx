@@ -12,14 +12,12 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
         e.preventDefault();
         setIsLoading(true);
 
-        const newHotel ={ // Variable for the Hotel that is created
+        const newHotel ={
           name: (name),
           company: (company),
           city: (city),
           country: (country)
         }
-
-        console.log(newHotel);
 
         fetch("/hotels", {
           method: "POST",
@@ -35,12 +33,10 @@ function NewHotel({hotels, setHotels, errors, setErrors}){
           setIsLoading(false);
           if(r.ok) return r.json()
           else r.json().then((err) => {
-            console.log(err);
             setErrors(err.errors)
           })
         })
         .then((data) => {
-          console.log("newHotel: ", newHotel);
             setHotels([...hotels, data]);
         });
         setName('');

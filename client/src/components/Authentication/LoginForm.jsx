@@ -11,14 +11,11 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
             body: JSON.stringify({username, password})
         }).then((user) => {
             setIsLoading(false);
-            // debugger
             user.json().then((user) => {
                 if(user.errors){
-                    // debugger
                     setErrors(user.errors);
                     return errors;
                 } else{
-                    // debugger
                     onLogin(user);
                 }
             });

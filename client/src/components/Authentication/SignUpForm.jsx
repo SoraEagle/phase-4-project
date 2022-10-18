@@ -14,14 +14,12 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
       }
 
       setIsLoading(true);
-      // debugger
       fetch('/users', {
         method: "POST",
         headers: headers,
         body: JSON.stringify(strongParams)
       }).then((user) => {
         setIsLoading(false);
-        // debugger
         user.json().then((user) => {
           if(user.errors){ // If the user Object has errors:
             setErrors(user.errors); // set the state of "errors" to user.errors
@@ -32,8 +30,6 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
         });
       });
     }
-
-    // Fix being able to ATTEMPT to sign up an User without an username or password, WITHOUT the page erroring out...
   
   return(
     <div id='signup'>

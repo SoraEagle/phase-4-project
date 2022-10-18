@@ -18,5 +18,3 @@ class HotelsController < ApplicationController
         params.require(:hotel).permit(:name, :city, :country, :company)
     end
 end
-
-# Make sure everything works properly!

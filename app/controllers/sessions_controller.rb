@@ -12,12 +12,8 @@ class SessionsController < ApplicationController
       end
     else # If the username is invalid (or not entered):
       render json: {errors: ["Invalid username"]}, status: :unauthorized
-      # search "how to generate error messages"
     end
   end
-
-  # Currently, a custom error message cannot be made for the third test case (username AND password are invalid or weren't entered in), as
-  # if user is nil, there can be no checks on the password.
 
   def destroy
     session.delete :user_id

@@ -6,7 +6,7 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
     function handleDateSubmit(e){
       e.preventDefault();
 
-        const newBooking = { // Object to represent the new Booking Object
+        const newBooking = {
           user_id: (currentUser.id),
           hotel_id: (hotel.id),
           date: (date)
@@ -21,7 +21,6 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
         }).then((booking) => {
           booking.json().then((booking) => {
             if(booking.errors){
-              console.log("booking.errors: ", booking.errors);
               setErrors(booking.errors);
               return errors;
             } else{
@@ -39,7 +38,7 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
     <div>
         <form onSubmit={handleDateSubmit}>
             <label>Start Date: </label>
-            <input type="date" name='date' value={date} id='date' onChange={handleChange} /> {/* Make sure to add in name and value attributes!!! */}
+            <input type="date" name='date' value={date} id='date' onChange={handleChange} />
             <input type="submit" value="Submit" />
         </form>
     </div>
