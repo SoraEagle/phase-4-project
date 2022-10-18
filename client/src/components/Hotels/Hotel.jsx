@@ -7,7 +7,6 @@ function Hotel({currentUser, hotel, errors, setErrors}){
   const [isBooking, setIsBooking] = useState(false);
 
   function postBookings(){
-    console.log(hotel);
     setIsBooking(true);
   }
 
@@ -32,6 +31,3 @@ function Hotel({currentUser, hotel, errors, setErrors}){
 }
 
 export default Hotel;
-
-/*
-*/
