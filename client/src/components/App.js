@@ -15,6 +15,7 @@ function App(){
   const [booked, setBooked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [date, setDate] = useState(new Date());
   
   useEffect(() => { // auto-login
     fetch("/me").then((r) => {
@@ -40,10 +41,10 @@ function App(){
         <Routes>
           <Route path={"/"} element={<Home currentUser={currentUser} />} />
           <Route path={"/hotels"} element={<Hotels currentUser={currentUser} // 
-          errors={errors} setErrors={setErrors} />}
+          errors={errors} setErrors={setErrors} date={date} setDate={setDate} />}
           booked={booked} setBooked={setBooked} errors={errors} setErrors={setErrors} />
           <Route path={"/bookings"} element={<Bookings currentUser={currentUser} errors={errors} setErrors={setErrors}
-          booked={booked} setBooked={setBooked} />} />
+          booked={booked} setBooked={setBooked} date={date} setDate={setDate} />} />
         </Routes>
         <Footer />
         </div>

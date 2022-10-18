@@ -3,7 +3,7 @@ import Hotel from "../components/Hotels/Hotel";
 import NewHotel from "../components/Hotels/NewHotel";
 import {HotelsContext} from "../context/hotelsList";
 
-function Hotels({currentUser, errors, setErrors, booked, setBooked}){
+function Hotels({currentUser, errors, setErrors, booked, setBooked, date, setDate}){
   const {hotels, setHotels} = useContext(HotelsContext);
   
   return(
@@ -15,7 +15,7 @@ function Hotels({currentUser, errors, setErrors, booked, setBooked}){
         <div id="hotels">
           <h2>Feel free to browse our selection of premium hotels:</h2>
           {hotels.map((hotel) => {return <h5 key={hotel.id} ><Hotel hotel={hotel} currentUser={currentUser} booked={booked} setBooked={setBooked}
-          errors={errors} setErrors={setErrors} /></h5>})}
+          errors={errors} setErrors={setErrors} date={date} setDate={setDate} /></h5>})}
         </div>
       )}
     </div>

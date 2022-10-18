@@ -1,11 +1,7 @@
 class BookingsController < ApplicationController
     skip_before_action :authorize, only: [:create, :destroy]
     def index
-        if params[:user_id]
-            bookings = set_user.bookings
-        else
-            bookings = Booking.all
-        end
+        bookings = set_user.bookings
         render json: bookings
     end
 
@@ -20,6 +16,12 @@ class BookingsController < ApplicationController
         else
             render json: {errors: booking.errors.full_messages}, status: :unauthorized
         end
+    end
+
+    def update
+        booking = set_user.bookings.find(params[:id])
+        booking.update(date: params[:date])
+        render json: booking
     end
 
     def destroy
