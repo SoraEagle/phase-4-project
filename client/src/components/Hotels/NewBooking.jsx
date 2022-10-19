@@ -32,13 +32,11 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
         });
     }
 
-    const handleChange = (e) => { setDate(e.target.value); }
-
   return(
     <div>
         <form onSubmit={handleDateSubmit}>
             <label>Start Date: </label>
-            <input type="date" name='date' value={date} id='date' onChange={handleChange} />
+            <input type="date" name='date' value={date} id='date' onChange={(e) => setDate(e.target.value)} />
             <input type="submit" value="Submit" />
         </form>
     </div>
