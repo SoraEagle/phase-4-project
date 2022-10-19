@@ -20,14 +20,14 @@ function App(){
   useEffect(() => { // auto-login
     fetch("/me").then((r) => {
       if (r.ok){
-        r.json().then((currentUser) => setCurrentUser(currentUser)); // Sends the current user's info, including all associations.
+        r.json().then((currentUser) => setCurrentUser(currentUser));
       }
     });
   }, []);
 
   if(!currentUser) return(
     <Router>
-      <Login onLogin={setCurrentUser} currentUser={currentUser} isLoading={isLoading} setIsLoading={setIsLoading} errors={errors} setErrors={setErrors} />
+      <Login onLogin={setCurrentUser} isLoading={isLoading} setIsLoading={setIsLoading} errors={errors} setErrors={setErrors} />
       <Footer />
     </Router>
   );
@@ -36,20 +36,20 @@ function App(){
     <HotelsProvider><BookingsProvider>
       <Router>
         <div id="App">
-        {currentUser ? <h1>Logged In!</h1> : null}
-        <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser} />
-        <Routes>
-          <Route path={"/"} element={<Home currentUser={currentUser} />} />
-          <Route path={"/hotels"} element={<Hotels currentUser={currentUser} // 
-          errors={errors} setErrors={setErrors} date={date} setDate={setDate} />}
-          booked={booked} setBooked={setBooked} errors={errors} setErrors={setErrors} />
-          <Route path={"/bookings"} element={<Bookings currentUser={currentUser} errors={errors} setErrors={setErrors}
-          booked={booked} setBooked={setBooked} date={date} setDate={setDate} />} />
-        </Routes>
-        <Footer />
+          {currentUser ? <h1>Logged In!</h1> : null}
+          <NavBar setCurrentUser={setCurrentUser} setErrors={setErrors}/>
+          <Routes>
+            <Route path={"/"} element={<Home currentUser={currentUser} />} />
+            <Route path={"/hotels"} element={<Hotels currentUser={currentUser} 
+            errors={errors} setErrors={setErrors} date={date} setDate={setDate} />}
+            booked={booked} setBooked={setBooked} errors={errors} setErrors={setErrors} />
+            <Route path={"/bookings"} element={<Bookings currentUser={currentUser}
+            errors={errors} setErrors={setErrors}date={date} setDate={setDate} />} />
+          </Routes>
+          <Footer />
         </div>
       </Router>
-      </BookingsProvider></HotelsProvider>
+    </BookingsProvider></HotelsProvider>
   );
 }
 

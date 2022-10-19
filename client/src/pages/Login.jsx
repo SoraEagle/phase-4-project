@@ -2,7 +2,7 @@ import {useState} from "react";
 import LoginForm from "../components/Authentication/LoginForm";
 import SignUpForm from "../components/Authentication/SignUpForm";
 
-function Login({currentUser, onLogin, isLoading, setIsLoading, errors, setErrors}){
+function Login({onLogin, isLoading, setIsLoading, errors, setErrors}){
   const [showLogin, setShowLogin] = useState(true);
   const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
