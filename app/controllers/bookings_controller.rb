@@ -20,8 +20,12 @@ class BookingsController < ApplicationController
 
     def update
         booking = set_user.bookings.find(params[:id])
-        booking.update(date: params[:date])
-        render json: booking
+        # booking.update(date: params[:date])
+        if (booking.update(date: params[:date]))
+            render json: booking
+        else
+            render json: {errors: booking.errors.full_messages}, status: :unauthorized
+        end
     end
 
     def destroy
