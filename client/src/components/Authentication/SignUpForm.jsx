@@ -14,7 +14,7 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
       }
 
       setIsLoading(true);
-      fetch('/users', {
+      fetch('/signup', {
         method: "POST",
         headers: headers,
         body: JSON.stringify(strongParams)
