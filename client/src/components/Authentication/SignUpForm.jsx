@@ -21,11 +21,9 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
       }).then((user) => {
         setIsLoading(false);
         user.json().then((user) => {
-          if(user.errors){ // If the user Object has errors:
-            setErrors(user.errors); // set the state of "errors" to user.errors
-            return errors;
-          } else{ // Otherwise, log in
-            setErrors([]);
+          if(user.errors) setErrors(user.errors);
+          else{
+            setErrors(null);
             onLogin(user);
           }
         });
@@ -59,7 +57,7 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
         {
           errors ? (errors?.map((err) => (
             <p key={err}>{err}</p>
-          ))) : (setErrors([]))
+          ))) : (setErrors(null))
         }
         </div>
       </form>

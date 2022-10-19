@@ -14,7 +14,7 @@ function App(){
   const [currentUser, setCurrentUser] = useState(null);
   const [booked, setBooked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
   const [date, setDate] = useState(new Date());
   
   useEffect(() => { // auto-login

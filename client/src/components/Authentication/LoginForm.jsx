@@ -12,11 +12,9 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
         }).then((user) => {
             setIsLoading(false);
             user.json().then((user) => {
-                if(user.errors){
-                    setErrors(user.errors);
-                    return errors;
-                } else{
-                    setErrors([]);
+                if(user.errors)setErrors(user.errors);
+                else{
+                    setErrors(null);
                     onLogin(user);
                 }
             });

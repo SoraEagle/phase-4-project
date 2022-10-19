@@ -24,7 +24,7 @@ function Hotel({currentUser, hotel, errors, setErrors, date, setDate}){
       {
         errors ? (errors.map((err) => (
           <label key={err}>{err}</label>
-        ))) : (setErrors([]))
+        ))) : (setErrors(null))
       }
     </div>
   );

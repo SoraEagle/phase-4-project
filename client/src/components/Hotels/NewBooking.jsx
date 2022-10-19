@@ -20,10 +20,8 @@ function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, er
         }),
         }).then((booking) => {
           booking.json().then((booking) => {
-            if(booking.errors){
-              setErrors(booking.errors);
-              return errors;
-            } else{
+            if(booking.errors) setErrors(booking.errors);
+            else{
               setBookings([...bookings, booking]);
               setErrors(null);
               setIsBooking(false);
