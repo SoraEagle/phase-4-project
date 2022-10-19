@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {headers} from '../../Globals';
 
 function NewBooking({currentUser, hotel, setIsBooking, bookings, setBookings, errors, setErrors, date, setDate}){
