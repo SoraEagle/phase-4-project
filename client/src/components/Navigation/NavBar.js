@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-function NavBar({setCurrentUser}){
+function NavBar({setCurrentUser, setErrors}){
     function handleLogoutClick(){
+        setErrors([]);
+        
         fetch("/logout", {method: "DELETE"}).then((r) => {
             if(r.ok) setCurrentUser(null);
         });

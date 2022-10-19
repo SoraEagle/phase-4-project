@@ -16,6 +16,7 @@ function LoginForm({onLogin, username, setUsername, password, setPassword, error
                     setErrors(user.errors);
                     return errors;
                 } else{
+                    setErrors([]);
                     onLogin(user);
                 }
             });

@@ -22,10 +22,9 @@ function Hotel({currentUser, hotel, errors, setErrors, date, setDate}){
         <button id={hotel.id} onClick={postBookings}>Book Now</button>
       )}
       {
-      hotel.errors ?
-        (errors.map((err) => (
-        <label key={err}>{err}</label>
-        ))) : (null)
+        errors ? (errors.map((err) => (
+          <label key={err}>{err}</label>
+        ))) : (setErrors([]))
       }
     </div>
   );

@@ -25,6 +25,7 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
             setErrors(user.errors); // set the state of "errors" to user.errors
             return errors;
           } else{ // Otherwise, log in
+            setErrors([]);
             onLogin(user);
           }
         });
@@ -55,9 +56,11 @@ function SignUpForm({onLogin, username, setUsername, password, setPassword, erro
           <input type="submit" value={isLoading ? "Loading..." : "Sign Up"} />
         </div>
         <div>
-          {errors?.map((error) => (
-            <p key={error}>{error}</p>
-          ))}
+        {
+          errors ? (errors?.map((err) => (
+            <p key={err}>{err}</p>
+          ))) : (setErrors([]))
+        }
         </div>
       </form>
     </div>
