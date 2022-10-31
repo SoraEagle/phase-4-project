@@ -1,4 +1,4 @@
-# Project Template: React/Rails API
+# Phase 4 Project
 This is the repository for my Phase 4 Project.
 
 ## Description
