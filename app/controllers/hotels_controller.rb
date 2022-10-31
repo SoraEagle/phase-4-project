@@ -1,5 +1,4 @@
 class HotelsController < ApplicationController
-    skip_before_action :authorize, only: [:create, :destroy]
     def index
         render json: Hotel.all
     end
